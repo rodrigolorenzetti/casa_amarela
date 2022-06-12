@@ -1,0 +1,78 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@100;200;300;400;500;600;700;800;900&display=swap');
+
+// Altere o font-family do body por aqui
+@font_family: 'Poppins', sans-serif;;
+
+@primaryColor: #234964;  
+@secondaryColor: #FF9B04; 
+@defaultColor: #fff;
+
+@titleColor: #383232;
+
+@textColor: #767676;
+
+.soft-transition (@time: 0.2s, @effect: linear){
+	-ms-filter: progid:DXImageTransform.Microsoft.Alpha(Opacity = 50);
+	-webkit-transition: all @time @effect;
+	-moz-transition: all @time @effect;
+	-o-transition: all @time @effect;
+	transition: all @time @effect;
+}
+
+.btn-style(@color: @defaultColor, @textTransform: none, @padding: 15px 30px, @fontWeight: 600, @fontSize: 18px, @border: 2px solid @color, @background: transparent) {
+    align-items: center;
+    border: @border;
+    background: @background;
+    border-radius: 20px;
+    color: @color;
+    display: flex;
+    font-style: normal;
+    font-weight: @fontWeight;
+    font-size: @fontSize;
+    text-align: center;
+    padding: @padding;
+    max-width: fit-content;
+    .soft-transition(@effect: linear);
+
+    &.disabled{
+        opacity: 0.6;
+        pointer-events: none;
+    }
+
+    &:hover, &:active, &:focus{
+        box-shadow: none;
+        background: @color;
+        color: @primaryColor;
+        outline: 0;
+        text-decoration: none;
+    }
+}
+
+.title-style(@fontWeight: bold, @fontSize: 38px, @color: @primaryColor, @marginBottom: 30px, @lineHeight: 55px, @after: true){
+    color: @color;
+    font-weight: @fontWeight;
+    font-size: @fontSize;
+    line-height: @lineHeight;
+    margin-bottom: @marginBottom;
+    position: relative;
+
+    & when(@after = true){
+        &:after{
+            background: @color;
+            bottom: -5px;
+            content: '';
+            height: 2px;
+            left: 0;
+            position: absolute;
+            width: 80px;
+        }
+    }
+}
+
+.text-style(@fontSize: 18px, @fontWeight: normal, @color: @textColor, @lineHeight: 28px){
+    color: @color;
+    font-weight: @fontWeight;
+    font-size: @fontSize;
+    line-height: @lineHeight;
+}
+

@@ -1,0 +1,252 @@
+header {
+    background: transparent;
+    left: 0;
+    padding: 25px 0;
+    position: fixed;
+    top: 0;
+    width: 100%;
+    z-index: 1024;
+    .soft-transition();
+
+    /* Estado do header no scroll */
+    &.shadowed {
+        background: #fff;
+        box-shadow: 0px 4px 18px rgba(0, 0, 0, 0.15);
+
+        .header-link, .iconify-link {
+            color: @primaryColor;
+        }
+
+        .iconify-link:hover{
+            background: rgba(35,73,100,0.1);
+        }
+
+        .btn-geral{
+            border-color: @primaryColor;
+            color: @primaryColor;
+
+            &:hover, &:active, &:focus{
+                background: @primaryColor;
+                color: #fff;
+            }
+        }
+    }
+
+    /* background que será exibido no menu mobile */
+    .background {
+        background: rgba(0, 0, 0, 0.6);
+        backdrop-filter: blur(6px);
+        -webkit-backdrop-filter: blur(6px);
+        display: none;
+        height: 100%;
+        left: 0;
+        top: 0;
+        position: fixed;
+        opacity: 0;
+        visibility: hidden;
+        transition-timing-function: cubic-bezier(0.78, -0.04, 0, 0.88);
+        transition-duration: 0.6s;
+        width: 100%;
+        z-index: -1;
+    }
+
+    /* Estilização do link do header */
+    .header-link {
+        color: #fff;
+        font-weight: 500;
+        position: relative;
+
+        &:after {
+            background: currentcolor;
+            bottom: -3px;
+            content: '';
+            height: 1px;
+            position: absolute;
+            left: 0;
+            width: 0;
+            .soft-transition();
+        }
+
+        &.active{
+            font-weight: bold;
+
+            &:after {
+                width: 40%;
+            }
+        }
+
+        &:hover {
+            &:after {
+                width: 100%;
+            }
+        }
+    }
+
+    /* Estilização do link com ícone */
+
+    .iconify-link{
+        align-items: center;
+        border-radius: 999px;
+        display: flex;
+        color: #fff;
+        font-size: 20px;
+        height: 35px;
+        justify-content: center;
+        width: 35px;
+        .soft-transition(@time: 0.3s, @effect: linear);
+
+        &:hover{
+            background: rgba(255,255,255,0.3);
+        }
+    }
+
+    .btn-geral{
+        max-width: 100%;
+    }
+
+    /* elemento com o logo, links e botão de menu mobile */
+    .nav-default {
+        align-items: center;
+        display: flex;
+        justify-content: space-between;
+        width: 100%;
+    
+        /* elemento com o logo e botão de menu mobile */
+        .nav-menu {
+            align-items: center;
+            display: flex;
+            justify-content: space-between;
+            width: 100%;
+        }
+
+        .nav-mobile-links{
+            display: flex;
+            justify-content: space-between;
+            transition-timing-function: cubic-bezier(0.78, -0.04, 0, 0.88);
+            transition-duration: 0.6s;
+            width: 100%;
+        }
+    
+        /* lista de links */
+        .nav-links {
+            align-items: center;
+            display: flex;
+            gap: 40px;
+            list-style: none;
+            padding: 0;
+            margin: 0;
+            width: 100%;
+        }
+
+        .iconify-links {
+            align-items: center;
+            display: flex;
+            gap: 5px;
+            list-style: none;
+            padding: 0;
+            margin: 0;
+        }
+    
+        /* Div contendo o botão mobile, fica invisivel até 1200px */
+        .nav-toggle {
+            display: none;
+        }
+    
+        /* Botão mobile */
+        .nav-button {
+            background: none;
+            border: none;
+            cursor: pointer;
+            height: auto;
+            display: flex;
+            flex-direction: column;
+            margin-left: auto;
+            width: 25px;
+    
+            .span-menu {
+                background: #fff;
+                border-radius: 50px;
+                height: 1px;
+                position: relative;
+                z-index: 5;
+                width: 100%;
+                transition-timing-function: cubic-bezier(0.78, -0.04, 0, 0.88);
+                transition-duration: 0.6s;
+    
+                &+.span-menu {
+                    margin-top: 5px;
+                }
+            }
+        }
+    
+        // header com menu mobile aberto
+        &.menu-mobile-opened {
+            .nav-mobile-links {
+                right: 0;
+                z-index: 1025;
+            }
+    
+            .background {
+                opacity: 1;
+                visibility: visible;
+                z-index: 1024;
+            }
+    
+            .nav-button .span-menu {
+                background: #000;
+    
+                &:nth-child(1) {
+                    transform: rotate(45deg) translate(5px, 4px);
+                }
+    
+                &:nth-child(2) {
+                    transform: rotate(-45deg) translate(0px, 1px);
+                }
+    
+                &:nth-child(3) {
+                    // opacity: 0;
+                    transform: rotate(0deg) scale(0, 0);
+                }
+            }
+        }
+    }
+}
+
+
+@media only screen and (max-width: 1200px) {
+    header {
+        .header-link{
+            color: @primaryColor;
+        }
+
+        .background {
+            display: block;
+        }
+
+        .nav-default {
+            .nav-mobile-links{
+                background: #fff;
+                box-shadow: 0px 0px 20px rgba(0, 0, 0, 0.15);
+                flex-direction: column;
+                height: 100%;
+                padding: 80px 30px;
+                position: fixed;
+                right: -100%;
+                top: 0;
+                width: 80%;
+                z-index: -1;
+            }
+
+            .nav-links {
+                align-items: flex-start;
+                flex-direction: column
+            }
+    
+            .nav-toggle {
+                display: block;
+                position: relative;
+                z-index: 1026;
+            }
+        }
+    }
+}

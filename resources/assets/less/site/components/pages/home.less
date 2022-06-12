@@ -1,0 +1,128 @@
+#banner{
+    height: 100vh;
+    position: relative;
+
+    .banner-background{
+        height: 100%;
+        left: 0;
+        object-fit: cover;
+        position: absolute;
+        top: 0;
+        width: 100%;
+    }
+
+    .container{
+        height: 100%;
+        position: relative;
+    }
+
+    .content{
+        align-items: flex-end;
+        display: flex;
+        justify-content: space-between;
+        height: 100%;
+
+        .text, .image{
+            height: 100%;
+            width: 48%;
+        }
+
+        .image{
+            align-items: flex-end;
+            display: flex;
+        }
+
+        .text{
+            padding-top: 15%;
+
+            .banner-title,.banner-text{
+                color: #fff;
+            }
+
+            .banner-title{
+                font-weight: 400;
+                font-size: 48px;
+                line-height: 75px;
+
+                &:after{
+                    content: unset
+                }
+
+                span{
+                    background: @secondaryColor;
+                    border-radius: 15px;
+                    padding: 0px 15px;
+                }
+            }
+
+            .banner-text{
+                margin-bottom: 40px;
+            }
+
+            .btn-geral{
+                padding-left: 60px;
+                padding-right: 60px;
+            }
+        }
+    }
+}
+
+.donation-card{
+    background: #FFFFFF;
+    box-shadow: 0px 8px 16px rgba(0, 0, 0, 0.15);
+    border-radius: 20px;
+    display: flex;
+    flex-direction: column;
+    padding: 30px;
+    position: relative;
+
+    &:nth-child(even):after{
+        background: @secondaryColor;
+    }
+
+    &:after{
+        background: @primaryColor;
+        border-radius: 20px 20px 0 0;
+        content: '';
+        height: 18px;
+        left: 0;
+        position: absolute;
+        top: 0;
+        width: 100%;
+    }
+
+    .recommended-star{
+        color: @secondaryColor;
+        font-size: 55px;
+        position: absolute;
+        right: -20px;
+        transform: rotate(25deg)!important;
+        top: -20px;
+        z-index: 2;
+    }
+
+    .donation-item{
+        align-items: center;
+        display: flex;
+        margin-bottom: 20px;
+
+        .iconify{
+            margin-right: 10px;
+        }
+
+        p{
+            font-size: 16px;
+            margin-bottom: 0;
+        }
+    }
+
+    .geral-inline-link{
+        margin: auto 0 0 auto;
+    }
+}
+
+.partner-item{
+    align-items: center;
+    display: flex;
+    justify-content: center;
+}
