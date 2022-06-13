@@ -1,27 +1,3 @@
-@php
-
-$link_home = '';
-$link_about = '';
-$link_donation_plans = '';
-$link_contact = '';
-
-if ($current_page == '' or empty($current_page)) {
-    $link_home = 'active';
-} else {
-    switch ($current_page) {
-        case route('about'):
-            $link_about = 'active';
-            break;
-        case route('donation_plans'):
-            $link_donation_plans = 'active';
-            break;
-        case route('contact'):
-            $link_contact = 'active';
-            break;
-    }
-}
-@endphp
-
 <header>
     <div class="container-fluid">
 
@@ -32,11 +8,11 @@ if ($current_page == '' or empty($current_page)) {
                     <div class="nav-mobile-links">
                         <ul class="nav-links">
                             <li>
-                                <a class="header-link {{ $link_home }}" href="{{ route('home') }}" title="Início"
+                                <a class="header-link {{ (request()->routeIs('home')) ? 'active' : '' }}" href="{{ route('home') }}" title="Início"
                                     aria-label="Início">Início</a>
                             </li>
                             <li>
-                                <a class="header-link {{ $link_donation_plans }}"
+                                <a class="header-link {{ (request()->routeIs('donation_plans')) ? 'active' : '' }}"
                                     href="{{ route('donation_plans') }}" title="Planos de doações"
                                     aria-label="Planos de doações">Planos de doações</a>
                             </li>
@@ -45,12 +21,12 @@ if ($current_page == '' or empty($current_page)) {
                                     title="Seja um parceiro" aria-label="Seja um parceiro">Seja um parceiro</a>
                             </li>
                             <li>
-                                <a class="header-link {{ $link_about }}" href="{{ route('about') }}"
+                                <a class="header-link {{ (request()->routeIs('about')) ? 'active' : '' }}" href="{{ route('about') }}"
                                     title="Sobre nós" aria-label="Sobre nós">Sobre nós</a>
                             </li>
 
                             <li>
-                                <a class="header-link {{ $link_contact }}" href="{{ route('contact') }}"
+                                <a class="header-link {{ (request()->routeIs('contact')) ? 'active' : '' }}" href="{{ route('contact') }}"
                                     title="Contato" aria-label="Contato">Contato</a>
                             </li>
                             <li>

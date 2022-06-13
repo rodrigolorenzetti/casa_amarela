@@ -1,39 +1,51 @@
 <footer>
     <div class="container-fluid">
         <div class="container">
-            <a href="/" class="logo">
-                <img data-src="/img/site/brand/logo.svg" alt="Logo" class="lazy">
-            </a>
+            <div class="footer-links">
+                <a href="/" class="logo" title="{{config('app.name')}}">
+                    <img data-src="/img/site/brand/logo.png" alt="Logo Casa Amarela" class="lazy" width="100" height="100">
+                </a>
+                <p class="footer-text">
+                    Rua 31 de Março, 34<br>São Sebastiao, Lages - SC, 88520-335
+                </p>
+                <a href="{{route('donation')}}" class="btn-geral" title="Fazer uma doação" aria-label="Fazer uma doação">Fazer uma doação</a>
 
-            <div class="footer-nav">
-                <ul>
-                    <li>
-                        <a href="/" title="Página inicial">Home</a>
-                    </li>
-                    <li>
-                        <a href="{{route('about_us')}}" title="Sobre nós">Sobre nós</a>
-                    </li>
-                    <li>
-                        <a href="#contato" title="Contato">Contato</a>
-                    </li>
+                <div class="links">
+                    <a href="tel:32220400" class="footer-text footer-link" title="Ligar para a Casa Amarela" aria-label="Ligar para a Casa Amarela">
+                        (49) 3224-0400
+                    </a>
+                    <a href="mailto:email@email.com" class="footer-text footer-link" title="Mandar e-mail para a Casa Amarela" aria-label="Mandar e-mail para a Casa Amarela">
+                        email@email.com
+                    </a>
+                </div>
 
-                    <li class="link-social">
-                        <a href="https://instagram.com" title="Link para o instagram da" target="_blank">
+                <ul class="footer-list">
+                    <li>
+                        <a href="https://facebook.com" target="_blank" class="footer-text footer-link"
+                            title="Ir para o Facebook da Casa Amarela"
+                            aria-label="Ir para o Facebook da Casa Amarela">
+                            <span class="iconify" data-icon="akar-icons:facebook-fill"></span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="https://instagram.com" target="_blank" class="footer-text footer-link"
+                            title="Ir para o Instagram da Casa Amarela"
+                            aria-label="Ir para o Instagram da Casa Amarela">
                             <span class="iconify" data-icon="akar-icons:instagram-fill"></span>
                         </a>
                     </li>
-                    <li class="link-social">
-                        <a href="https://facebook.com" title="Link para o facebook da" target="_blank">
-                            <span class="iconify" data-icon="iconoir:facebook"></span>
-                        </a>
-                    </li>
-                    <li class="link-social">
-                        <a href="https://youtube.com" title="Link para o youtube da" target="_blank">
-                            <span class="iconify" data-icon="lucide:youtube"></span>
+                    <li>
+                        <a href="https://wa.me/+55999999999" target="_blank" class="footer-text footer-link"
+                            title="Ir para o Whatsapp da Casa Amarela"
+                            aria-label="Ir para o Whatsapp da Casa Amarela">
+                            <span class="iconify" data-icon="akar-icons:whatsapp-fill"></span>
                         </a>
                     </li>
                 </ul>
             </div>
+            <p class="footer-text text-center">
+                Copyright 2021 © INSTITUTO CASA AMARELA. Todos os direitos reservados
+            </p>
         </div>
     </div>
 </footer>

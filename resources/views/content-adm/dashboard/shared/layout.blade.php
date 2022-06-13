@@ -38,7 +38,7 @@ $urlDashboard = $GLOBALS['urlDashboard'];
     <meta name="description" content="{{ config('app.name') }} | ADM">
     <meta name="author" content="Equipe 13 - Uniplac">
     <meta name="robots" content="noindex">
-    <link rel="shortcut icon" href="/img/site/brand/favicon.svg">
+    <link rel="shortcut icon" href="/img/site/brand/logo.png">
 
     <title>{{ config('app.name') }} | ADM</title>
 

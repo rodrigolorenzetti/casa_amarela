@@ -24,18 +24,18 @@ $current_page = $current_page[1];
     <meta name="author" content="Equipe 13 - Uniplac">
     <meta name="viewport"
         content="width=device-width, initial-scale=1, maximum-scale=1, minimum-scale=1, user-scalable=0">
-    <link rel="shortcut icon" href="/img/site/brand/favicon.svg">
+    <link rel="shortcut icon" href="/img/site/brand/logo.png">
 
-    <title>{{ config('app.name') }}</title>
+    {{-- <title>{{ config('app.name') }}</title> --}}
 
-    {{-- <title>@yield("page_title", config('app.name'))</title>
-	<meta name='description' content='@yield("page_description")'>
+    <title>@yield("page_title", config('app.name'))</title>
+	<meta name='description' content='@yield("page_description", "Temos como missão a preparação e qualificação de adolescentes e Jovens para a inserção no mercado de trabalho e tambem apoiar o desenvolvimento de crianças")'>
 	<meta property='og:title' content='@yield("page_title", config('app.name'))'>
 	<meta property='og:type' content='website'>
 	<meta property='og:image' content='/img/site/brand/big-logo.jpg'>
 	<meta property='og:site_name' content='@yield("page_title", config('app.name'))'>
-	<meta property='og:description' content='@yield("page_description")'> 
-	<link rel='canonical' href='https://{{$_SERVER['HTTP_HOST']}}/{{$current_page}}'> --}}
+	<meta property='og:description' content='@yield("page_description", "Temos como missão a preparação e qualificação de adolescentes e Jovens para a inserção no mercado de trabalho e tambem apoiar o desenvolvimento de crianças")'> 
+	<link rel='canonical' href='https://{{$_SERVER['HTTP_HOST']}}/{{$current_page}}'>
 
     <link rel="preload" as="style" href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css"
         onload="this.onload=null;this.rel='stylesheet'">
@@ -66,6 +66,11 @@ $current_page = $current_page[1];
     <noscript>
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css">
     </noscript>
+    <link rel="preload" as="style" href="https://unpkg.com/swiper@8/swiper-bundle.min.css"
+        onload="this.onload=null;this.rel='stylesheet'">
+    <noscript>
+        <link rel="stylesheet" href="https://unpkg.com/swiper@8/swiper-bundle.min.css">
+    </noscript>
 
     <!-- CSS DO PROJETO -->
 
@@ -80,6 +85,7 @@ $current_page = $current_page[1];
 
     <script defer src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
     <script defer src="https://unpkg.com/scrollreveal@4.0.0/dist/scrollreveal.min.js"></script>
+    <script defer src="https://unpkg.com/swiper@8/swiper-bundle.min.js"></script>
     {{-- <script defer src="{{mix("lib/selectFx/selectFx.js")}}"></script>
     <script defer src="{{mix("lib/selectFx/classie.js")}}"></script>
     <script defer src="{{mix("lib/selectFx/config-select.js")}}"></script>
@@ -118,7 +124,7 @@ $current_page = $current_page[1];
     </main>
 
 
-    {{-- @include('site.components.footer') --}}
+    @include('site.components.footer')
 
 </body>
 

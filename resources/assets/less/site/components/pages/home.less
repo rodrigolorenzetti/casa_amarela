@@ -126,3 +126,97 @@
     display: flex;
     justify-content: center;
 }
+
+.volunteering-swiper-area{
+    margin-top: 40px;
+    overflow: hidden;
+}
+
+.volunteering-item{
+    background: @primaryColor;
+    border-radius: 20px;
+    display: flex;
+    flex-direction: column;
+    min-height: 285px;
+    padding: 30px;
+
+    h3, .brief{
+        color: #fff;
+    }
+
+    h3{
+        font-size: 22px;
+    }
+
+    &:hover .read-more:after{
+        width: 100%;
+    }
+
+    .read-more{
+        align-items: center;
+        color: @secondaryColor;
+        display: flex;
+        margin-top: auto;
+        position: relative;
+        width: fit-content;
+
+        .iconify{
+            margin-left: 15px;
+        }
+
+        &:after{
+            background: currentcolor;
+            bottom: -2px;
+            content: '';
+            height: 1px;
+            position: absolute;
+            width: 0%;
+            .soft-transition();
+        }
+
+        
+    }
+}
+
+
+#donation{
+    position: relative;
+
+    img{
+        height: 100%;
+        left: 0;
+        object-fit: cover;
+        position: absolute;
+        top: 0;
+        width: 100%;
+    }
+
+    article{
+        position: relative;
+        text-align: center;
+        
+        h2{
+            color: #fff;
+            margin: 0 auto 45px;
+            width: fit-content;
+
+            &:after{
+                background: currentcolor;
+                height: 3px;
+                width: 100%;
+                bottom: -10px;
+            }
+        }
+
+        p{
+            color: #fff;
+            font-weight: bold;
+        }
+
+        .btn-geral{
+            margin: 30px auto 0;
+            padding-left: 7p0x;
+            padding-right: 7p0x;
+        }
+    }
+}

@@ -6,6 +6,29 @@ h3,h4,h5,h6{
     .title-style(@fontSize: 26px, @lineHeight: 38px, @after: false, @color: @titleColor, @fontWeight: 600, @marginBottom: 15px);
 }
 
+.title-w-bg{
+    border-radius: 20px;
+    color: #fff;
+    font-size: 32px;
+    line-height: 55px;
+    padding: 0px 50px;
+    margin-left: auto;
+    margin-right: auto;
+    width: fit-content;
+
+    &.blue-bg{
+        background: @primaryColor;
+    }
+
+    &.orange-bg{
+        background: @secondaryColor;
+    }
+
+    &:after{
+        content: unset;
+    }
+}
+
 .geral-inline-link{
     align-items: center;
     color: @secondaryColor;
@@ -39,6 +62,12 @@ h3,h4,h5,h6{
 }
 
 .simditor-text{
+    color: @textColor!important;
+
+    &.black-text{
+        color: #434343!important;
+    }
+
     h1,h2{
         color: @primaryColor!important;
     }
@@ -48,7 +77,7 @@ h3,h4,h5,h6{
     }
 
     p, li, span{
-        color: @textColor;
+        color: inherit!important;
     }
 
 }

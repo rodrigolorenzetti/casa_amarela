@@ -227,7 +227,7 @@ window.setLeftPosition = async function() {
 
 	}
 
-	$('.home-products-slider.swiper-container').css('padding-left', defaultMarginLeft + 'px');
+	$('.volunteering-swiper.swiper-container').css('padding-left', defaultMarginLeft + 'px');
 
 }
 
@@ -249,6 +249,27 @@ window.loadBannerSwiper = async function() {
 	})
 }
 
+window.loadVolunteeringSwiper = async function(){
+	new Swiper('.volunteering-swiper.swiper-container', {
+		spaceBetween: 30,
+		breakpoints:{
+			0:{
+				slidesPerView: 1.2,
+				spaceBetween: 20,
+			},
+			700:{
+				slidesPerView: 2.2,
+			},
+			1300:{
+				slidesPerView: 3.2,
+			},
+			1500:{
+				slidesPerView: 4.2,
+			},
+		}
+	})
+}
+
 $(window).scroll(function () {
 
 	/* Caso o header mude de cor*/
@@ -259,7 +280,7 @@ $(window).scroll(function () {
 
 $(document).ready(async function () {
 	/* para swipers que devem estar alinhados com o container */
-	// await setLeftPosition()
+	await setLeftPosition()
 
 	removeEffects();
 	setEffects();
@@ -269,7 +290,7 @@ $(document).ready(async function () {
 	checkViewport();
 
 	/* se tiver swipers: */
-	// await loadBannerSwiper();
+	await loadVolunteeringSwiper();
 
 	if ($(window).width() < 1200) {
 		closeMenuByBackground();

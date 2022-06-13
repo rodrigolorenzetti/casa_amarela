@@ -4,7 +4,7 @@
 
 	<div class="login-form">
 
-		<img class="form-logo" alt="Logo" src="/img/site/brand/logo.svg">
+		<img class="form-logo" alt="Logo" src="/img/site/brand/logo.png">
 
 		<form id="form-login">
 

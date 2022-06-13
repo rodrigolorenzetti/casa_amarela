@@ -13,11 +13,38 @@ use Illuminate\Support\Facades\Validator;
 
 class SiteGeralController extends Controller
 {
-    public function Index()
+    public function index()
     {
         // $page_home = PageHome::find(1);
 
         return view("site.home.index", [
+            // 'page_home' => $page_home,
+        ]);
+    }
+
+    public function donation_plans()
+    {
+        // $page_home = PageHome::find(1);
+
+        return view("site.donation_plans.index", [
+            // 'page_home' => $page_home,
+        ]);
+    }
+
+    public function about()
+    {
+        // $page_home = PageHome::find(1);
+
+        return view("site.about.index", [
+            // 'page_home' => $page_home,
+        ]);
+    }
+
+    public function contact()
+    {
+        // $page_home = PageHome::find(1);
+
+        return view("site.contact.index", [
             // 'page_home' => $page_home,
         ]);
     }

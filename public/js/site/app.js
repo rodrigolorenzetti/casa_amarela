@@ -2591,7 +2591,7 @@ window.setLeftPosition = /*#__PURE__*/_asyncToGenerator( /*#__PURE__*/_babel_run
             defaultMarginLeft = '30';
           }
 
-          $('.home-products-slider.swiper-container').css('padding-left', defaultMarginLeft + 'px');
+          $('.volunteering-swiper.swiper-container').css('padding-left', defaultMarginLeft + 'px');
 
         case 3:
         case "end":
@@ -2627,17 +2627,50 @@ window.loadBannerSwiper = /*#__PURE__*/_asyncToGenerator( /*#__PURE__*/_babel_ru
     }
   }, _callee2);
 }));
-$(window).scroll(function () {
-  /* Caso o header mude de cor*/
-  checkViewport();
-});
-$(document).ready( /*#__PURE__*/_asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().mark(function _callee3() {
+window.loadVolunteeringSwiper = /*#__PURE__*/_asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().mark(function _callee3() {
   return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().wrap(function _callee3$(_context3) {
     while (1) {
       switch (_context3.prev = _context3.next) {
         case 0:
-          /* para swipers que devem estar alinhados com o container */
-          // await setLeftPosition()
+          new Swiper('.volunteering-swiper.swiper-container', {
+            spaceBetween: 30,
+            breakpoints: {
+              0: {
+                slidesPerView: 1.2,
+                spaceBetween: 20
+              },
+              700: {
+                slidesPerView: 2.2
+              },
+              1300: {
+                slidesPerView: 3.2
+              },
+              1500: {
+                slidesPerView: 4.2
+              }
+            }
+          });
+
+        case 1:
+        case "end":
+          return _context3.stop();
+      }
+    }
+  }, _callee3);
+}));
+$(window).scroll(function () {
+  /* Caso o header mude de cor*/
+  checkViewport();
+});
+$(document).ready( /*#__PURE__*/_asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().mark(function _callee4() {
+  return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().wrap(function _callee4$(_context4) {
+    while (1) {
+      switch (_context4.prev = _context4.next) {
+        case 0:
+          _context4.next = 2;
+          return setLeftPosition();
+
+        case 2:
           removeEffects();
           setEffects();
           clickOnLinksBehavior();
@@ -2645,20 +2678,23 @@ $(document).ready( /*#__PURE__*/_asyncToGenerator( /*#__PURE__*/_babel_runtime_r
 
           checkViewport();
           /* se tiver swipers: */
-          // await loadBannerSwiper();
 
+          _context4.next = 8;
+          return loadVolunteeringSwiper();
+
+        case 8:
           if ($(window).width() < 1200) {
             closeMenuByBackground(); // adjustBody();
 
             closeMenuOnLinkClick();
           }
 
-        case 5:
+        case 9:
         case "end":
-          return _context3.stop();
+          return _context4.stop();
       }
     }
-  }, _callee3);
+  }, _callee4);
 })));
 
 /***/ }),

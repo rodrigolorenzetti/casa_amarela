@@ -22,7 +22,7 @@ switch (true) {
 
         <div class="sidebar-head">
             <a class='sidebar-link sidebar-logo' href="{{ $GLOBALS['urlDashboard'] }}/dashboard" title="Marin Logo">
-                <img src="/img/site/brand/logo.svg" alt="Logo | Admin">
+                <img src="/img/site/brand/logo.png" alt="Logo | Admin">
             </a>
 
             <span class="version-ueek">

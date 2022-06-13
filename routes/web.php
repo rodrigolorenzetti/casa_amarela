@@ -30,4 +30,7 @@ Route::namespace("Site")
 
         // Rota para a página de contato
         Route::any('contato', [SiteGeralController::class, 'contact'])->name('contact');
+
+        // Rota para a página de voluntariado
+        Route::any('voluntariado/{voluntariado}', [SiteGeralController::class, 'volunteering'])->name('volunteering');
     });

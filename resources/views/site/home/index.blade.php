@@ -55,7 +55,7 @@
                 doa
                 quanto para quem é nosso parceiro, <a class="blue-text" title="Confira o plano de doações Casa Amarela"
                     href="{{ route('donation_plans') }}" aria-label="Confira o plano de doações Casa Amarela"><b>confira
-                        aqui</b></a>.
+                        o plano de doações Casa Amarela</b></a>.
             </p>
 
             <p>
@@ -69,12 +69,12 @@
             <h2 title="Lojas parceiras" class="blue-text">Lojas parceiras</h2>
             <p>
                 Confira todas as empresas parceiras que contribuem para o nosso dia a dia.<br>
-                Quer se tornar um parceiro? <a class="orange-text" title="Seja um parceiro Casa Amarela"
+                Quer saber mais? <a class="orange-text" title="Seja um parceiro Casa Amarela"
                     href="{{ route('donation_plans') }}#seja-um-parceiro"
-                    aria-label="Seja um parceiro Casa Amarela"><b>Clique aqui</b></a>.
+                    aria-label="Seja um parceiro Casa Amarela"><b>Seja um parceiro Casa Amarela</b></a>.
             </p>
 
-            <div class="geral-grid-div column-4 gap-40">
+            <div class="geral-grid-div column-4 gap-40 mb-0">
                 <x-PartnerItem name="Imagem placeholder" normalSrc="/img/site/images/image-placeholder.png"
                     webpSrc="/img/site/images/image-placeholder.webp" />
                 <x-PartnerItem name="Imagem placeholder" normalSrc="/img/site/images/image-placeholder.png"
@@ -84,6 +84,57 @@
                 <x-PartnerItem name="Imagem placeholder" normalSrc="/img/site/images/image-placeholder.png"
                     webpSrc="/img/site/images/image-placeholder.webp" />
             </div>
+        </article>
+    </section>
+    <section class="geral-section pt-0">
+        <div class="container-fluid">
+            <article class="container">
+                <h2 title="Voluntariado">Voluntariado</h2>
+                <p>
+                    Abaixo estão todas as oportunidades de nos ajudar! <br>
+                    Caso queira conversar direto conosco, 
+                    <a class="orange-text" title="Converse conosco" aria-label="Converse conosco" href="{{route('contact')}}"><b>preencha o formulário de contato.</b></a>
+                </p>
+            </article>
+        </div>
+
+        <div class="volunteering-swiper-area">
+            <div class="volunteering-swiper swiper-container">
+                <div class="swiper-wrapper">
+                    <div class="swiper-slide">
+                        <x-VolunteeringItem title="Oportunidade 1" route="item" text="Lorem ipsum dolor sit amet consectur lorem dolor, lorem ipsum dolor sit amet consectur lorem dolor"/>
+                    </div>    
+                    <div class="swiper-slide">
+                        <x-VolunteeringItem title="Oportunidade 2" route="item" text="Lorem ipsum dolor sit amet consectur lorem dolor, lorem ipsum dolor sit amet consectur lorem dolor"/>
+                    </div>    
+                    <div class="swiper-slide">
+                        <x-VolunteeringItem title="Oportunidade 3" route="item" text="Lorem ipsum dolor sit amet consectur lorem dolor"/>
+                    </div>    
+                    <div class="swiper-slide">
+                        <x-VolunteeringItem title="Oportunidade 4" route="item" text="Lorem ipsum dolor sit amet consectur lorem dolor, lorem ipsum dolor sit amet consectur lorem dolor"/>
+                    </div>    
+                    <div class="swiper-slide">
+                        <x-VolunteeringItem title="Oportunidade 5" route="item" text="Lorem ipsum dolor sit amet consectur lorem dolor, lorem ipsum dolor sit amet consectur lorem dolor"/>
+                    </div>   
+                    <div class="swiper-slide">
+                        <x-VolunteeringItem title="Oportunidade 6" route="item" text="Lorem ipsum dolor sit amet consectur lorem dolor, lorem ipsum dolor sit amet consectur lorem dolor"/>
+                    </div>   
+                </div>                
+            </div>
+        </div>
+    </section>
+
+    <section class="geral-section container-fluid" id="donation">
+        <picture>
+            <source type="image/webp" srcset="/img/site/images/donation-section.webp">
+            <source type="image/png" srcset="/img/site/images/donation-section.png">
+            <img data-src="/img/site/images/donation-section.png" alt="Crianças desenhando"
+                class="lazy" width="1920" height="450">
+        </picture>
+        <article class="container fadeIn">
+            <h2 title="Faça uma doação">Faça uma doação</h2>
+            <p>Faça uma doação, seja em dinheiro ou materiais que precisamos e ajude<br>o instituto a crescer e continuar na luta por uma sociedade melhor</p>
+            <a href="{{route('donation')}}" class="btn-geral" title="Doar" aria-label="Doar">Doar</a>
         </article>
     </section>
 @endsection

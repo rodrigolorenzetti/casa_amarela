@@ -1,8 +1,48 @@
 footer{
+    background: @primaryColor;
     padding-bottom: 40px;
     padding-top: 40px;
 
+    .footer-text{
+        color: #fff;
+        font-size: 18px;
+    }
+
+    .footer-link{
+        .soft-transition();
+
+        &:hover{
+            color: @secondaryColor;
+        }
+    }
+    
+    .footer-links{
+        align-items: center;
+        display: flex;
+        gap: 30px;
+        margin-bottom: 50px;
+    }
+
+    .btn-geral{
+        margin-left: auto;
+    }
+   
+
+    .links{
+        display: flex;
+        flex-direction: column;
+    }
+
+    .footer-list{
+        align-items: center;
+        display: flex;
+        list-style: none;
+        gap: 15px;
+        margin: 0;
+        padding: 0;
+    }
+
     .logo img{
-        height: 40px;
+        height: 100px;
     }
 }
