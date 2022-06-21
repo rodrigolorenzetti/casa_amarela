@@ -19,7 +19,7 @@
 	transition: all @time @effect;
 }
 
-.btn-style(@color: @defaultColor, @textTransform: none, @padding: 15px 30px, @fontWeight: 600, @fontSize: 18px, @border: 2px solid @color, @background: transparent) {
+.btn-style(@color: @defaultColor, @textTransform: none, @padding: 15px 30px, @fontWeight: 600, @fontSize: 18px, @border: 2px solid @color, @background: transparent, @colorHover: @primaryColor, @backgroundHover: @color) {
     align-items: center;
     border: @border;
     background: @background;
@@ -41,8 +41,8 @@
 
     &:hover, &:active, &:focus{
         box-shadow: none;
-        background: @color;
-        color: @primaryColor;
+        background: @backgroundHover;
+        color: @colorHover;
         outline: 0;
         text-decoration: none;
     }
@@ -58,7 +58,7 @@
 
     & when(@after = true){
         &:after{
-            background: @color;
+            background: currentcolor;
             bottom: -5px;
             content: '';
             height: 2px;

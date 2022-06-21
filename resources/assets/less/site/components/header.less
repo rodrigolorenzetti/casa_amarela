@@ -8,6 +8,14 @@ header {
     z-index: 1024;
     .soft-transition();
 
+    .logo{
+        display: none;
+
+        img{
+            height:90px
+        }
+    }
+
     /* Estado do header no scroll */
     &.shadowed {
         background: #fff;
@@ -30,6 +38,10 @@ header {
                 color: #fff;
             }
         }
+
+        // .nav-default .nav-button .span-menu {
+        //     background: @primaryColor;
+        // }
     }
 
     /* background que será exibido no menu mobile */
@@ -111,14 +123,6 @@ header {
         justify-content: space-between;
         width: 100%;
     
-        /* elemento com o logo e botão de menu mobile */
-        .nav-menu {
-            align-items: center;
-            display: flex;
-            justify-content: space-between;
-            width: 100%;
-        }
-
         .nav-mobile-links{
             display: flex;
             justify-content: space-between;
@@ -215,6 +219,17 @@ header {
 
 @media only screen and (max-width: 1200px) {
     header {
+        padding: 10px 0;
+
+        .logo{
+            display: block;
+        }
+
+        &.shadowed {
+            background: @primaryColor;
+            box-shadow: 0px 4px 18px rgba(252, 252, 252, 0.2);
+        }
+
         .header-link{
             color: @primaryColor;
         }
@@ -223,11 +238,16 @@ header {
             display: block;
         }
 
+        .iconify-link{
+            color: @primaryColor;
+        }
+
         .nav-default {
             .nav-mobile-links{
                 background: #fff;
                 box-shadow: 0px 0px 20px rgba(0, 0, 0, 0.15);
                 flex-direction: column;
+                gap: 20px;
                 height: 100%;
                 padding: 80px 30px;
                 position: fixed;
@@ -239,7 +259,23 @@ header {
 
             .nav-links {
                 align-items: flex-start;
-                flex-direction: column
+                flex-direction: column;
+                gap: 20px;
+                height: 100%;
+
+                li:last-child{
+                    margin-top: auto;
+                    width: 100%;
+
+                    a{
+                        justify-content: center;
+                        max-width: 100%;
+                    }
+                }
+            }
+
+            .iconify-links{
+                justify-content: center;
             }
     
             .nav-toggle {

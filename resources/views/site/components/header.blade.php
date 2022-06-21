@@ -4,7 +4,6 @@
         <div class="container">
             <nav class="nav-default">
                 <div class="background"></div>
-                <div class="nav-menu">
                     <div class="nav-mobile-links">
                         <ul class="nav-links">
                             <li>
@@ -31,7 +30,7 @@
                             </li>
                             <li>
 
-                                <a class="btn-geral" href="{{ route('donation') }}" title="Fazer doação"
+                                <a class="btn-geral" href="https://institutocasaamarela.apoiar.co/" target="_blank" title="Fazer doação"
                                     aria-label="Fazer doação">Fazer
                                     doação</a>
                             </li>
@@ -61,7 +60,9 @@
                             </li>
                         </ul>
                     </div>
-                </div>
+                <a href="{{route('home')}}" class="logo" title="{{config('app.name')}}" aria-labe="{{config('app.name')}}">
+                    <img data-src="/img/site/brand/logo.png" alt="Logo Casa Amarela" class="lazy" width="100" height="100">
+                </a>
 
                 <div class="nav-toggle">
                     <button class="button button-action button-primary nav-button">

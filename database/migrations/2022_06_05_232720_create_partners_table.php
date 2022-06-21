@@ -17,6 +17,7 @@ return new class extends Migration
             $table->id();
             $table->string("name", 64);
             $table->string("image", 100);
+            $table->string("image_webp", 100);
             $table->timestamps();
             $table->tinyInteger('status');
         });

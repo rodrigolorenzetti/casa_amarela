@@ -4,6 +4,11 @@ $location = $GLOBALS['location'];
 
 $link_dashboard = '';
 $link_admin = '';
+$link_partners = '';
+$link_donation_options = '';
+$link_site_configurations = '';
+$link_volunteerings = '';
+$link_about_gallery = '';
 
 switch (true) {
     case stripos($location, 'dashboard') !== false:
@@ -13,6 +18,26 @@ switch (true) {
     case stripos($location, 'gestor') !== false:
         $link_admin = 'active';
         break;
+
+    case stripos($location, 'parceiro') !== false:
+        $link_partners = 'active';
+        break;
+
+        case stripos($location, 'doacao') !== false:
+        $link_donation_options = 'active';
+        break;
+
+    case stripos($location, 'configuracoes') !== false:
+        $link_site_configurations = 'active';
+        break;
+
+    case stripos($location, 'voluntariado') !== false:
+        $link_volunteerings = 'active';
+        break;
+
+        case stripos($location, 'galeria') !== false:
+        $link_about_gallery = 'active';
+        break;
 }
 
 @endphp
@@ -21,7 +46,7 @@ switch (true) {
     <nav class='first-top-padding'>
 
         <div class="sidebar-head">
-            <a class='sidebar-link sidebar-logo' href="{{ $GLOBALS['urlDashboard'] }}/dashboard" title="Marin Logo">
+            <a class='sidebar-link sidebar-logo' href="{{route('dashboard')}}" title="{{config('app.name')}}">
                 <img src="/img/site/brand/logo.png" alt="Logo | Admin">
             </a>
 
@@ -38,35 +63,35 @@ switch (true) {
 
                 <p class="label-links">Gestão de conteúdo</p>
 
-                <a class="sidebar-link {{ $link_dashboard }}" href="{{ $GLOBALS['urlDashboard'] }}/dashboard">
+                <a class="sidebar-link {{$link_dashboard}}" href="{{route('dashboard')}}">
                     <span class="iconify" data-icon="bx:bxs-dashboard"></span>
                     Dashboard
                 </a>
 
-                <a class="sidebar-link " href="{{ route('partner.list') }}">
+                <a class="sidebar-link {{$link_partners}}" href="{{ route('partner.list') }}">
                     <span class="iconify" data-icon="clarity:users-line"></span>
-                    Parceiros
+                    Empresas parceiras
                 </a>
 
-                <div class="collapse-group">
-                    <a class="sidebar-link " data-bs-toggle="collapse" href="#collapseproduct" role="button"
-                        aria-expanded="false" aria-controls="collapseproduct">
-                        <span class="iconify" data-icon="bx:bxs-package"></span>
-                        Collapse
-                        <span class="iconify" data-icon="feather:chevron-down"></span>
-                    </a>
-                    <div class="collapse multi-collapse" id="collapseproduct">
-                        <a class="sidebar-link" href="{{ $GLOBALS['urlDashboard'] }}/">
-                            <span class="iconify" data-icon="bx:bxs-spreadsheet"></span>
-                            Item
-                        </a>
-                        <a class="sidebar-link " href="{{ $GLOBALS['urlDashboard'] }}/">
-                            <span class="iconify" data-icon="bx:bxs-square-rounded"></span>
-                            Item
-                        </a>
+                <a class="sidebar-link {{$link_donation_options}}" href="{{ route('donation_options.list') }}">
+                    <span class="iconify" data-icon="akar-icons:money"></span>
+                    Opções de doação
+                </a>
 
-                    </div>
-                </div>
+                <a class="sidebar-link {{$link_volunteerings}}" href="{{ route('volunteering.list') }}">
+                    <span class="iconify" data-icon="fa-solid:tools"></span>
+                   Voluntariados
+                </a>
+
+                <a class="sidebar-link {{$link_site_configurations}}" href="{{ route('site_configurations.edit') }}">
+                    <span class="iconify" data-icon="bytesize:settings"></span>
+                   Configurações do Site
+                </a>
+
+                <a class="sidebar-link {{$link_about_gallery}}" href="{{ route('about_gallery.edit') }}">
+                    <span class="iconify" data-icon="bi:images"></span>
+                    Galeria de imagens
+                </a>
 
             </div>
 
@@ -74,7 +99,7 @@ switch (true) {
 
                 <p class="label-links">Configurações</p>
 
-                <a class="sidebar-link {{ $link_admin }}" href="{{ $GLOBALS['urlDashboard'] }}/lista-gestores">
+                <a class="sidebar-link {{$link_admin}}" href="{{route('admin.list')}}">
                     <span class="iconify" data-icon="gridicons:multiple-users"></span>
                     Usuários gestores
                 </a>

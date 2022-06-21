@@ -2,7 +2,7 @@
 @section('content')
     <div class="default-space-between">
 
-        <h1>Parceiros</h1>
+        <h1>Empresas parceiras</h1>
 
         <p><b>Todos os dados cadastrados pelo gestor são exibidos aqui.</b> Para editar as informações, clique no botão
             amarelo. Para remover, clique no botão vermelho</p>

@@ -1,5 +1,305 @@
-@media only screen and (max-width: 800px){
+@media only screen and (max-width: 1600px){
+    #banner .content .text {
+        padding-top: 8%;
+    }
+
+    #about .video-div .video-item {
+        height: 430px;
+    }
+}
+
+@media only screen and (max-width: 1536px){
+    #banner .content .text .banner-title {
+        font-size: 43px;
+        line-height: 68px;
+    }
+}
+
+@media only screen and (max-width: 1400px){
+    .donation-card {
+        padding: 30px 20px;
+
+        .donation-item p {
+            font-size: 15px;
+        }
+    }
+
+    h3, h4, h5, h6 {
+        font-size: 23px;
+        line-height: 36px;
+    }
+
+    h1, h2 {
+        font-size: 34px;
+        line-height: 55px;
+    }
+
+    #about .content-flex p {
+        max-width: 60%;
+        font-size: 18px;
+        line-height: 34px;
+    }
+}
+
+@media only screen and (max-width: 1200px){
+    #banner {
+        height: auto;
+
+        .content {
+            align-items: center;
+            display: flex;
+            flex-direction: column;
+            gap: 40px;
+
+            .text {
+                padding-top: 4%;
+                width: 100%;
+            }
+
+            .image{
+                justify-content: center;
+                width: 50%;
+            }
+        }
+    }
+
+    .geral-grid-div.column-3 {
+        grid-template-columns: repeat(2, 1fr);
+    }
+
+    .geral-grid-div.column-4 {
+        grid-template-columns: repeat(3, 1fr);
+    }
+
+    .donation-card{
+        &:nth-child(even):after {
+            background: @primaryColor;
+        }
+
+        &:nth-child(3n+3),
+        &:nth-child(2){
+            &:after{
+                background: @secondaryColor;
+            }
+        }
+    }
+
+    footer .footer-links {
+        flex-wrap: wrap;
+    
+        p{
+            width: 60%;
+        }
+
+        .btn-geral{
+            margin-left: 0;
+        }
+
+        &:last-child {
+            flex-direction: column-reverse;
+            align-items: flex-start;
+
+            p{
+                text-align: left!important;
+                width: 100%;
+            }
+        }
+    }
+
+    .partner-seal-list {
+        grid-template-columns: repeat(1, 1fr);
+        gap: 80px;
+        margin-top: 110px;
+
+        .partner-seal{
+            padding: 65px 35px 60px !important;
+
+            &:nth-child(odd) {
+                margin-top: 0;
+            }
+
+            .icon {
+                font-size: 50px;
+                height: 90px;
+                width: 90px;
+            }
+        }
+    }
+
+    .about-gallery-grid .swiper-wrapper {
+        display: flex;
+        grid-template-columns: unset;
+        gap: 0;
+    }
+
+    #gallery-section{
+        position: relative;
+        padding-bottom: 400px;
+
+        .about-gallery-grid-area{
+            position: absolute;
+            left: 0;
+            bottom: 70px;
+            width: 100%;
+        }
+    }
+
+    #contact .form-map {
+        flex-direction: column;
+        gap: 40px;
+
+        .half-part{
+            width: 100%;
+        }
+    }
+}
+
+@media only screen and (max-width: 850px){
 	.custom-modal .content {
         max-width: 90%;
+    }
+
+    .geral-grid-div.column-4 {
+        grid-template-columns: repeat(2, 1fr);
+    }
+
+    #about .content-flex {
+        flex-direction: column;
+
+        p {
+            max-width: 100%;
+        }
+
+        .divider {
+            height: 2px;
+            margin-top: 0;
+            width: 200px;
+            margin-bottom: 40px;
+        }
+    }
+}
+
+@media only screen and (max-width: 700px){
+    #banner .content .image {
+        width: 70%;
+    }
+
+    .geral-grid-div.column-3 {
+        grid-template-columns: repeat(1, 1fr);
+    }
+
+    .donation-card{
+        &:nth-child(3n+3),
+        &:nth-child(2){
+            &:after{
+                background: @primaryColor;
+            }
+        }
+
+        &:nth-child(even):after {
+            background: @secondaryColor;
+        }
+    }
+
+    footer .footer-links p {
+        width: 100%;
+    }
+
+    #banner .content .text .banner-title {
+        font-size: 34px;
+        line-height: 53px;
+    }
+
+    #about .video-div .video-item {
+        height: 260px;
+
+        .iconify {
+            font-size: 55px;
+        }
+    }
+
+    footer .footer-text {
+        font-size: 17px;
+    }
+
+    header .logo img {
+        height: 70px;
+    }
+}
+
+@media only screen and (max-width: 500px){
+    #banner .content {
+        .image {
+            width: 80%;
+        }
+
+        .text .banner-title {
+            font-size: 30px;
+            line-height: 49px;
+        }
+    }
+
+    .geral-grid-div.gap-40 {
+        gap: 20px;
+    }
+
+    .volunteering-item {
+        padding: 25px;
+    }
+
+    h1, h2 {
+        font-size: 29px;
+        line-height: 51px;
+    }
+
+    .title-w-bg {
+        font-size: 22px;
+        line-height: 51px;
+        padding: 0px 30px;
+        width: fit-content;
+    }
+
+    .geral-section {
+        padding-bottom: 60px;
+        padding-top: 60px;
+    }
+
+    .first-section {
+        padding-top: 150px;
+    }
+
+    #contact .form-map .map {
+        border-radius: 30px;
+        height: 310px;
+        overflow: hidden;
+    }
+
+    .geral-grid-div.column-2 {
+        grid-template-columns: repeat(1, 1fr);
+    }
+
+    .donation-card .recommended-star {
+        right: -15px;
+    }
+}
+
+@media only screen and (max-width: 400px){
+    #gallery-section {
+        padding-bottom: 350px;
+    }
+
+    .about-gallery-grid .gallery-item {
+        display: block;
+        height: 250px;
+        position: relative;
+    }
+
+    #banner .content .text .banner-title {
+        font-size: 25px;
+        line-height: 50px;
+
+        span{
+            padding: 5px 15px;
+        }
     }
 }

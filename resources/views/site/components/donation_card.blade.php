@@ -10,7 +10,7 @@
         <span class="iconify recommended-star" data-icon="ant-design:star-filled"></span>
     @endif
 
-    <a href="{{ route('donation') }}" class="geral-inline-link" title="Doar" aria-label="Doar">
+    <a href="https://institutocasaamarela.apoiar.co/" target="_blank" class="geral-inline-link" title="Doar" aria-label="Doar">
         Doar
         <span class="iconify" data-icon="akar-icons:arrow-right"></span>
     </a>

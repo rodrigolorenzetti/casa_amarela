@@ -15,10 +15,10 @@
                         Com apenas <span>R$5</span><br>
                         você faz a <span>diferença</span>
                     </h1>
-                    <p class="banner-text">
+                    <p class="banner-text remove-break">
                         Contribua e participe para continuarmos com<br>nosso projeto de construir uma sociedade melhor!
                     </p>
-                    <a href="{{ route('donation') }}" class="btn-geral" title="Doar para a Casa Amarela"
+                    <a href="https://institutocasaamarela.apoiar.co/" target="_blank" class="btn-geral" title="Doar para a Casa Amarela"
                         aria-label="Doar para a Casa Amarela">Doar</a>
                 </div>
                 <div class="image rightShow">
@@ -50,7 +50,7 @@
                 <x-DonationCard title="Ou doe quanto quiser" text="O quanto couber no seu bolso" isRecommended="0" />
             </div>
 
-            <p>
+            <p class="remove-break">
                 O <b class="orange-text">Plano de doações Casa Amarela</b> oferece vários benefícios<br>tanto para quem
                 doa
                 quanto para quem é nosso parceiro, <a class="blue-text" title="Confira o plano de doações Casa Amarela"
@@ -97,6 +97,7 @@
                 </p>
             </article>
         </div>
+        <div id="voluntariados"></div>
 
         <div class="volunteering-swiper-area">
             <div class="volunteering-swiper swiper-container">
@@ -133,8 +134,8 @@
         </picture>
         <article class="container fadeIn">
             <h2 title="Faça uma doação">Faça uma doação</h2>
-            <p>Faça uma doação, seja em dinheiro ou materiais que precisamos e ajude<br>o instituto a crescer e continuar na luta por uma sociedade melhor</p>
-            <a href="{{route('donation')}}" class="btn-geral" title="Doar" aria-label="Doar">Doar</a>
+            <p class="remove-break">Faça uma doação, seja em dinheiro ou materiais que precisamos e ajude<br>o instituto a crescer e continuar na luta por uma sociedade melhor</p>
+            <a href="https://institutocasaamarela.apoiar.co/" target="_blank" class="btn-geral" title="Doar" aria-label="Doar">Doar</a>
         </article>
     </section>
 @endsection

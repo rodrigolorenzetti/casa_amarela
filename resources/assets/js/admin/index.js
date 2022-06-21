@@ -258,8 +258,8 @@ if(currentLocation.includes("gestor")){
 
 require('./resources/pages');
 
-if(currentLocation.includes("home")){
-    require('./resources/page_home');
-}
-
 require('./resources/partners');
+require('./resources/donation_options');
+require('./resources/site_configuration');
+require('./resources/volunteering');
+require('./resources/about_gallery');

@@ -2570,7 +2570,7 @@ window.checkMenuOpened = function () {
 };
 
 window.closeMenuOnLinkClick = function () {
-  $(".nav-default a").on("click", function () {
+  $(".nav-links a").on("click", function () {
     $(this).parents("nav").toggleClass("menu-mobile-opened");
     checkMenuOpened();
   });
@@ -2593,7 +2593,11 @@ window.setLeftPosition = /*#__PURE__*/_asyncToGenerator( /*#__PURE__*/_babel_run
 
           $('.volunteering-swiper.swiper-container').css('padding-left', defaultMarginLeft + 'px');
 
-        case 3:
+          if ($(window).width() < 1200) {
+            $('.about-gallery-grid.swiper-container').css('padding-left', defaultMarginLeft + 'px');
+          }
+
+        case 4:
         case "end":
           return _context.stop();
       }
@@ -2645,7 +2649,7 @@ window.loadVolunteeringSwiper = /*#__PURE__*/_asyncToGenerator( /*#__PURE__*/_ba
               1300: {
                 slidesPerView: 3.2
               },
-              1500: {
+              1550: {
                 slidesPerView: 4.2
               }
             }
@@ -2658,16 +2662,55 @@ window.loadVolunteeringSwiper = /*#__PURE__*/_asyncToGenerator( /*#__PURE__*/_ba
     }
   }, _callee3);
 }));
-$(window).scroll(function () {
-  /* Caso o header mude de cor*/
-  checkViewport();
-});
-$(document).ready( /*#__PURE__*/_asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().mark(function _callee4() {
+window.loadGallerySwiper = /*#__PURE__*/_asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().mark(function _callee4() {
   return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().wrap(function _callee4$(_context4) {
     while (1) {
       switch (_context4.prev = _context4.next) {
         case 0:
-          _context4.next = 2;
+          new Swiper('.about-gallery-grid.swiper-container', {
+            spaceBetween: 20,
+            breakpoints: {
+              0: {
+                slidesPerView: 1.2
+              },
+              700: {
+                slidesPerView: 2.2
+              }
+            }
+          });
+
+        case 1:
+        case "end":
+          return _context4.stop();
+      }
+    }
+  }, _callee4);
+}));
+$("input[name='accept_terms']").on("change", function () {
+  if ($(this).prop("checked")) {
+    $(this).parents("form").find("button").removeClass("disabled");
+  } else {
+    $(this).parents("form").find("button").addClass("disabled");
+  }
+});
+
+if ($(window).width() < 1200) {
+  $("header .nav-default .nav-links .btn-geral").removeClass("btn-geral").addClass("btn-geral-secondary");
+  $(".remove-break").each(function () {
+    $(this).html($(this).html().replace("<br>", " "));
+  });
+}
+
+$(window).scroll(function () {
+  /* Caso o header mude de cor*/
+  checkViewport();
+});
+$(document).ready( /*#__PURE__*/_asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().mark(function _callee5() {
+  return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().wrap(function _callee5$(_context5) {
+    while (1) {
+      switch (_context5.prev = _context5.next) {
+        case 0:
+          _context5.next = 2;
           return setLeftPosition();
 
         case 2:
@@ -2679,22 +2722,27 @@ $(document).ready( /*#__PURE__*/_asyncToGenerator( /*#__PURE__*/_babel_runtime_r
           checkViewport();
           /* se tiver swipers: */
 
-          _context4.next = 8;
+          _context5.next = 8;
           return loadVolunteeringSwiper();
 
         case 8:
-          if ($(window).width() < 1200) {
-            closeMenuByBackground(); // adjustBody();
-
-            closeMenuOnLinkClick();
+          if (!($(window).width() < 1200)) {
+            _context5.next = 13;
+            break;
           }
 
-        case 9:
+          closeMenuByBackground(); // adjustBody();
+
+          closeMenuOnLinkClick();
+          _context5.next = 13;
+          return loadGallerySwiper();
+
+        case 13:
         case "end":
-          return _context4.stop();
+          return _context5.stop();
       }
     }
-  }, _callee4);
+  }, _callee5);
 })));
 
 /***/ }),

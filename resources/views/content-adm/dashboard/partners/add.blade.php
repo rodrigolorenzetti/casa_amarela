@@ -2,7 +2,7 @@
 @section('content')
     <div class="loading-form"></div>
 
-    <h1>Adicionar gestor</h1>
+    <h1>Adicionar empresa parceira</h1>
 
     <form id="add-partner" class="default-form">
         @csrf

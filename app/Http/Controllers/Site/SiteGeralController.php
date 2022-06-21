@@ -11,15 +11,15 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
 
+use App\Models\DonationOptions;
+
 class SiteGeralController extends Controller
 {
     public function index()
     {
-        // $page_home = PageHome::find(1);
+        $donation_options = DonationOptions::find(1);
 
-        return view("site.home.index", [
-            // 'page_home' => $page_home,
-        ]);
+        return view("site.home.index", compact(['donation_options']));
     }
 
     public function donation_plans()
@@ -45,6 +45,15 @@ class SiteGeralController extends Controller
         // $page_home = PageHome::find(1);
 
         return view("site.contact.index", [
+            // 'page_home' => $page_home,
+        ]);
+    }
+
+    public function volunteering()
+    {
+        // $page_home = PageHome::find(1);
+
+        return view("site.volunteering.index", [
             // 'page_home' => $page_home,
         ]);
     }

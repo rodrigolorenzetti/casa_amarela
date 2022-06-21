@@ -206,7 +206,7 @@ window.checkMenuOpened = function() {
 }
 
 window.closeMenuOnLinkClick = function() {
-	$(".nav-default a").on("click", function () {
+	$(".nav-links a").on("click", function () {
 		$(this).parents("nav").toggleClass("menu-mobile-opened")
 		checkMenuOpened();
 	})
@@ -228,6 +228,10 @@ window.setLeftPosition = async function() {
 	}
 
 	$('.volunteering-swiper.swiper-container').css('padding-left', defaultMarginLeft + 'px');
+
+	if($(window).width() < 1200){
+		$('.about-gallery-grid.swiper-container').css('padding-left', defaultMarginLeft + 'px');
+	}
 
 }
 
@@ -263,10 +267,41 @@ window.loadVolunteeringSwiper = async function(){
 			1300:{
 				slidesPerView: 3.2,
 			},
-			1500:{
+			1550:{
 				slidesPerView: 4.2,
 			},
 		}
+	})
+}
+
+window.loadGallerySwiper = async function(){
+	new Swiper('.about-gallery-grid.swiper-container', {
+		spaceBetween: 20,
+		breakpoints:{
+			0:{
+				slidesPerView: 1.2,
+			},
+			700:{
+				slidesPerView: 2.2,
+			},
+		}
+	})
+}
+
+$("input[name='accept_terms']").on("change", function(){
+	if($(this).prop("checked")){
+		$(this).parents("form").find("button").removeClass("disabled");
+	}else{
+		$(this).parents("form").find("button").addClass("disabled");
+	}
+})
+
+
+if($(window).width() < 1200){
+	$("header .nav-default .nav-links .btn-geral").removeClass("btn-geral").addClass("btn-geral-secondary")
+
+	$(".remove-break").each(function(){
+		$(this).html($(this).html().replace("<br>", " "))
 	})
 }
 
@@ -296,5 +331,7 @@ $(document).ready(async function () {
 		closeMenuByBackground();
 		// adjustBody();
 		closeMenuOnLinkClick()
+		
+		await loadGallerySwiper();
 	}
 });

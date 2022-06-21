@@ -27,7 +27,7 @@ class PartnerController extends Controller
             $partner = new Partner();
 
             $partner->name = $request->name;
-            $partner->image = UploadImageWithWebp($request->image, "img/uploads/partners");
+            list($partner->image, $partner->image_webp) = UploadImageWithWebp($request->image, "img/uploads/partners");
             $partner->status = 1;
 
             $partner->save();
@@ -60,10 +60,10 @@ class PartnerController extends Controller
     {
         try {
 
-            $data = $request->all();
+            $data = $request->except(['image-old', 'id']);
 
             if ($request->hasFile('image') && $request->file('image')->isValid()) {
-                $data['image'] = UploadImageWithWebp($request->image, "img/uploads/partners");
+                list($data['image'], $data['image_webp']) = UploadImageWithWebp($request->image, "img/uploads/partners");
             }
 
             Partner::findOrFail($request->id)->update($data);

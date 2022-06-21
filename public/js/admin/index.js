@@ -197,11 +197,186 @@ if (currentLocation.includes("gestor")) {
 
 __webpack_require__(/*! ./resources/pages */ "./resources/assets/js/admin/resources/pages.js");
 
-if (currentLocation.includes("home")) {
-  __webpack_require__(/*! ./resources/page_home */ "./resources/assets/js/admin/resources/page_home.js");
-}
-
 __webpack_require__(/*! ./resources/partners */ "./resources/assets/js/admin/resources/partners.js");
+
+__webpack_require__(/*! ./resources/donation_options */ "./resources/assets/js/admin/resources/donation_options.js");
+
+__webpack_require__(/*! ./resources/site_configuration */ "./resources/assets/js/admin/resources/site_configuration.js");
+
+__webpack_require__(/*! ./resources/volunteering */ "./resources/assets/js/admin/resources/volunteering.js");
+
+__webpack_require__(/*! ./resources/about_gallery */ "./resources/assets/js/admin/resources/about_gallery.js");
+
+/***/ }),
+
+/***/ "./resources/assets/js/admin/resources/about_gallery.js":
+/*!**************************************************************!*\
+  !*** ./resources/assets/js/admin/resources/about_gallery.js ***!
+  \**************************************************************/
+/***/ (() => {
+
+function _typeof(obj) { "@babel/helpers - typeof"; return _typeof = "function" == typeof Symbol && "symbol" == typeof Symbol.iterator ? function (obj) { return typeof obj; } : function (obj) { return obj && "function" == typeof Symbol && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }, _typeof(obj); }
+
+var redirectToList = function redirectToList() {
+  window.location.reload();
+};
+
+$("input[name='images']").on("change", function (e) {
+  var imageCount = document.getElementById("images").files.length;
+  $(".gallery.w-background").remove();
+
+  var _loop = function _loop() {
+    image = document.getElementById("images").files[i];
+
+    if (!image.type.includes("image")) {
+      showModalSmallResponse("Selecione apenas imagens! (Formatos jpg, png ou gif)", 'error');
+      return {
+        v: false
+      };
+    }
+
+    var div = $(".preview-img.div-to-add").clone();
+    div.removeClass("div-to-add");
+    div.find(".alt-text").removeAttr("hidden");
+    reader = new FileReader();
+
+    reader.onload = function (e) {
+      div.css('background-image', 'url(' + e.target.result + ')').addClass("w-background");
+    };
+
+    reader.readAsDataURL(image);
+    $(".div-to-add").before(div);
+  };
+
+  for (var i = 0; i < imageCount; i++) {
+    var image;
+    var reader;
+
+    var _ret = _loop();
+
+    if (_typeof(_ret) === "object") return _ret.v;
+  }
+});
+$("form#edit-about-gallery").submit(function (e) {
+  e.preventDefault();
+  var imageCount = document.getElementById("images").files.length;
+
+  if (imageCount > 20) {
+    showModalSmallResponse("Selecione 20 imagens por vez! (Formatos jpg, png ou gif)", 'error');
+    return false;
+  }
+
+  if (imageCount == 0) {
+    showModalSmallResponse("Selecione ao menos uma imagem para poder fazer o upload.", 'error');
+    return false;
+  } // Loading
+
+
+  var values = new FormData();
+  values.append('image_count', imageCount);
+  var image_alt = [];
+  $("input[name='image_alt[]']").each(function () {
+    image_alt.push($(this).val());
+  });
+  values.append('image_alt', image_alt);
+
+  for (var i = 0; i < imageCount; i++) {
+    var image = document.getElementById("images").files[i];
+
+    if (!image.type.includes("image")) {
+      showModalSmallResponse("Selecione apenas imagens! (Formatos jpg, png ou gif)", 'error');
+      return false;
+    }
+
+    var div = $(".preview-img.div-to-add").clone();
+    div.removeClass("div-to-add");
+    values.append('image' + i, image);
+  }
+
+  $('input[type="submit"]').addClass('disabled');
+  $.ajax({
+    xhr: function xhr() {
+      var xhr = new window.XMLHttpRequest();
+      xhr.upload.addEventListener("progress", function (evt) {
+        if (evt.lengthComputable) {
+          var percentComplete = evt.loaded / evt.total * 100;
+          percentComplete = Math.round(percentComplete);
+          $(".loading-form").width(percentComplete + '%');
+        }
+      }, false);
+      return xhr;
+    },
+    url: '/addAboutGallery',
+    type: "POST",
+    data: values,
+    processData: false,
+    contentType: false,
+    dataType: 'json',
+    beforeSend: function beforeSend() {
+      $(".loading-form").width('0%');
+    },
+    success: function success(retorno) {
+      $('input[type="submit"]').removeClass('disabled');
+
+      if (retorno.status == 1) {
+        showModalSmallResponse(retorno.msg, 'success');
+        setTimeout(redirectToList(), 2000);
+      } else {
+        showModalSmallResponse(retorno.msg, 'error');
+      }
+    },
+    error: function error(retorno) {
+      $('input[type="submit"]').removeClass('disabled');
+      showModalSmallResponse("Ocorreu um erro ao efetuar a operação. Por favor, entre em contato com o Suporte.", 'error');
+    }
+  });
+});
+$(".input_image_alt").on("blur", function () {
+  var id = $(this).parents(".image-item").find(".id").val();
+  var image_alt = $(this).parent().find(".alt").val();
+  $(".input_image_alt").addClass("disabled");
+  $.ajax({
+    url: '/updateAboutGalleryAlt',
+    type: 'POST',
+    dataType: 'JSON',
+    data: {
+      id: id,
+      alt_text: image_alt
+    },
+    success: function success(retorno) {
+      $(".input_image_alt").removeClass("disabled");
+
+      if (retorno.status != 1) {
+        showModalSmallResponse(retorno.msg, 'error');
+      }
+    },
+    error: function error(retorno) {
+      $(".input_image_alt").removeClass("disabled");
+      showModalSmallResponse("Ocorreu um erro interno de sistema, tente novamente mais tarde.", 'error');
+    }
+  });
+});
+$(".remove-gallery-image").click(function () {
+  var id = $(this).data("value");
+  var confirma = confirm('Deseja realmente remover este item? Esta ação é irreversível.');
+
+  if (confirma) {
+    $.ajax({
+      url: '/deleteAboutGallery',
+      type: 'POST',
+      dataType: 'JSON',
+      data: {
+        id: id
+      },
+      success: function success(retorno) {
+        if (retorno.status == 1 || retorno.status == 2) {
+          showModalSmallResponse(retorno.msg, 'success');
+          setTimeout(redirectToList, 2000);
+        }
+      }
+    });
+  }
+});
 
 /***/ }),
 
@@ -358,6 +533,124 @@ $(".remove-multiple-admins").click(function () {
 
 /***/ }),
 
+/***/ "./resources/assets/js/admin/resources/donation_options.js":
+/*!*****************************************************************!*\
+  !*** ./resources/assets/js/admin/resources/donation_options.js ***!
+  \*****************************************************************/
+/***/ (() => {
+
+var redirectToList = function redirectToList() {
+  window.location.href = '/content-adm/lista-opcoes-doacao';
+};
+
+var ajaxSubmit = function ajaxSubmit(id, route) {
+  var data = new FormData(document.getElementById(id));
+  $.ajax({
+    xhr: function xhr() {
+      var xhr = new window.XMLHttpRequest();
+      xhr.upload.addEventListener("progress", function (evt) {
+        if (evt.lengthComputable) {
+          var percentComplete = evt.loaded / evt.total * 100;
+          percentComplete = Math.round(percentComplete);
+          $(".loading-form").width(percentComplete + '%');
+        }
+      }, false);
+      return xhr;
+    },
+    url: '/' + route,
+    type: 'POST',
+    dataType: 'JSON',
+    data: data,
+    processData: false,
+    contentType: false,
+    beforeSend: function beforeSend() {
+      $(".loading-form").width('0%');
+    },
+    success: function success(retorno) {
+      $('input[type="submit"]').removeClass('disabled');
+
+      if (retorno.status == 1) {
+        showModalSmallResponse(retorno.msg, 'success');
+        setTimeout(redirectToList(), 2000);
+      } else {
+        showModalSmallResponse(retorno.msg, 'error');
+      }
+    },
+    error: function error(retorno) {
+      $('input[type="submit"]').removeClass('disabled');
+      showModalSmallResponse("Ocorreu um erro ao efetuar a operação. Por favor, entre em contato com o Suporte.", 'error');
+    }
+  });
+};
+
+$('form#add-donation-option').submit(function (e) {
+  var form = $(this);
+  e.preventDefault();
+
+  if (validateInputs(form)) {
+    $('input[type="submit"]').addClass('disabled');
+    ajaxSubmit("add-donation-option", "addDonationOptions");
+  }
+});
+$('form#edit-donation-option').submit(function (e) {
+  var form = $(this);
+  e.preventDefault();
+
+  if (validateInputs(form)) {
+    $('input[type="submit"]').addClass('disabled');
+    ajaxSubmit("edit-donation-option", "changeDonationOptions");
+  }
+});
+$(".remove-donation-option").click(function () {
+  var id = $(this).data("value");
+  var confirma = confirm('Deseja realmente remover este item? Esta ação é irreversível.');
+
+  if (confirma) {
+    $.ajax({
+      url: '/deleteDonationOptions',
+      type: 'PUT',
+      dataType: 'JSON',
+      data: {
+        id: id
+      },
+      success: function success(retorno) {
+        if (retorno.status == 1 || retorno.status == 2) {
+          showModalSmallResponse(retorno.msg, 'success');
+          setTimeout(redirectToList, 2000);
+        }
+      }
+    });
+  }
+});
+$(".remove-multiple-donation-options").click(function () {
+  var inputs = [];
+  $("input[name = 'delete-donation-options[]']").each(function () {
+    if ($(this).prop("checked")) {
+      inputs.push($(this).val());
+    }
+  });
+  var confirma = confirm('Deseja realmente remover estes itens? Esta ação é irreversível.');
+
+  if (confirma) {
+    $.ajax({
+      url: '/deleteMultipleDonationOptions',
+      type: 'PUT',
+      dataType: 'JSON',
+      data: {
+        inputs: inputs
+      },
+      success: function success(retorno) {
+        if (retorno.status == 1 || retorno.status == 2) {
+          showModalSmallResponse(retorno.msg, 'success');
+          setTimeout(redirectToList(), 2000);
+        }
+      }
+    });
+  }
+});
+
+/***/ }),
+
 /***/ "./resources/assets/js/admin/resources/login.js":
 /*!******************************************************!*\
   !*** ./resources/assets/js/admin/resources/login.js ***!
@@ -389,177 +682,6 @@ $('form#form-login').submit(function (e) {
       }
     }
   });
-});
-
-/***/ }),
-
-/***/ "./resources/assets/js/admin/resources/page_home.js":
-/*!**********************************************************!*\
-  !*** ./resources/assets/js/admin/resources/page_home.js ***!
-  \**********************************************************/
-/***/ (() => {
-
-function _typeof(obj) { "@babel/helpers - typeof"; return _typeof = "function" == typeof Symbol && "symbol" == typeof Symbol.iterator ? function (obj) { return typeof obj; } : function (obj) { return obj && "function" == typeof Symbol && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }, _typeof(obj); }
-
-var redirectToList = function redirectToList() {
-  window.location.reload();
-};
-
-$("input[name='images']").on("change", function (e) {
-  var imageCount = document.getElementById("images").files.length;
-
-  var _loop = function _loop() {
-    image = document.getElementById("images").files[i];
-
-    if (!image.type.includes("image")) {
-      showModalSmallResponse("Selecione apenas imagens! (Formatos jpg, png ou gif)", 'error');
-      return {
-        v: false
-      };
-    }
-
-    var div = $(".preview-img.div-to-add").clone();
-    div.removeClass("div-to-add");
-    div.find(".alt-text").removeAttr("hidden");
-    reader = new FileReader();
-
-    reader.onload = function (e) {
-      div.css('background-image', 'url(' + e.target.result + ')').addClass("w-background");
-    };
-
-    reader.readAsDataURL(image);
-    $(".div-to-add").before(div);
-  };
-
-  for (var i = 0; i < imageCount; i++) {
-    var image;
-    var reader;
-
-    var _ret = _loop();
-
-    if (_typeof(_ret) === "object") return _ret.v;
-  }
-});
-$("form#edit-page-home-gallery").submit(function (e) {
-  e.preventDefault();
-  var imageCount = document.getElementById("images").files.length;
-
-  if (imageCount > 20) {
-    showModalSmallResponse("Selecione 20 imagens por vez! (Formatos jpg, png ou gif)", 'error');
-    return false;
-  }
-
-  if (imageCount == 0) {
-    showModalSmallResponse("Selecione ao menos uma imagem para poder fazer o upload.", 'error');
-    return false;
-  }
-
-  var values = new FormData();
-  values.append('image_count', imageCount);
-  var image_alt = [];
-  $("input[name='image_alt[]']").each(function () {
-    image_alt.push($(this).val());
-  });
-  values.append('image_alt', image_alt);
-
-  for (var i = 0; i < imageCount; i++) {
-    var image = document.getElementById("images").files[i];
-
-    if (!image.type.includes("image")) {
-      showModalSmallResponse("Selecione apenas imagens! (Formatos jpg, png ou gif)", 'error');
-      return false;
-    }
-
-    var div = $(".preview-img.div-to-add").clone();
-    div.removeClass("div-to-add");
-    values.append('image' + i, image);
-  }
-
-  type = $("input[name='type']").val();
-  values.append('type', type);
-  $('input[type="submit"]').addClass('disabled');
-  $.ajax({
-    xhr: function xhr() {
-      var xhr = new window.XMLHttpRequest();
-      xhr.upload.addEventListener("progress", function (evt) {
-        if (evt.lengthComputable) {
-          var percentComplete = evt.loaded / evt.total * 100;
-          percentComplete = Math.round(percentComplete);
-          $(".loading-form").width(percentComplete + '%');
-        }
-      }, false);
-      return xhr;
-    },
-    url: '/addPageHomeGallery',
-    type: "POST",
-    data: values,
-    processData: false,
-    contentType: false,
-    dataType: 'json',
-    beforeSend: function beforeSend() {
-      $(".loading-form").width('0%');
-    },
-    success: function success(retorno) {
-      $('input[type="submit"]').removeClass('disabled');
-
-      if (retorno.status == 1) {
-        showModalSmallResponse(retorno.msg, 'success');
-        setTimeout(redirectToList(), 2000);
-      } else {
-        showModalSmallResponse(retorno.msg, 'error');
-      }
-    },
-    error: function error(retorno) {
-      $('input[type="submit"]').removeClass('disabled');
-      showModalSmallResponse("Ocorreu um erro ao efetuar a operação. Por favor, entre em contato com o Suporte.", 'error');
-    }
-  });
-});
-$(".input_image_alt").on("blur", function () {
-  var id = $(this).parents(".image-item").find(".id").val();
-  var image_alt = $(this).parent().find(".alt").val();
-  $(".input_image_alt").addClass("disabled");
-  $.ajax({
-    url: '/updatePageHomeAlt',
-    type: 'POST',
-    dataType: 'JSON',
-    data: {
-      id: id,
-      alt_text: image_alt
-    },
-    success: function success(retorno) {
-      $(".input_image_alt").removeClass("disabled");
-
-      if (retorno.status != 1) {
-        showModalSmallResponse(retorno.msg, 'error');
-      }
-    },
-    error: function error(retorno) {
-      $(".input_image_alt").removeClass("disabled");
-      showModalSmallResponse("Ocorreu um erro interno de sistema, tente novamente mais tarde.", 'error');
-    }
-  });
-});
-$(".remove-gallery-image").click(function () {
-  var id = $(this).data("value");
-  var confirma = confirm('Deseja realmente remover este item? Esta ação é irreversível.');
-
-  if (confirma) {
-    $.ajax({
-      url: '/deletePageHomeGallery',
-      type: 'POST',
-      dataType: 'JSON',
-      data: {
-        id: id
-      },
-      success: function success(retorno) {
-        if (retorno.status == 1 || retorno.status == 2) {
-          showModalSmallResponse(retorno.msg, 'success');
-          setTimeout(redirectToList, 2000);
-        }
-      }
-    });
-  }
 });
 
 /***/ }),
@@ -740,6 +862,237 @@ $(".remove-multiple-partners").click(function () {
         if (retorno.status == 1 || retorno.status == 2) {
           showModalSmallResponse(retorno.msg, 'success');
           setTimeout(redirectToList(), 2000);
+        }
+      }
+    });
+  }
+});
+
+/***/ }),
+
+/***/ "./resources/assets/js/admin/resources/site_configuration.js":
+/*!*******************************************************************!*\
+  !*** ./resources/assets/js/admin/resources/site_configuration.js ***!
+  \*******************************************************************/
+/***/ (() => {
+
+var redirectToList = function redirectToList() {
+  window.location.href = '/content-adm/editar-configuracoes-site';
+};
+
+var ajaxSubmit = function ajaxSubmit(id, route) {
+  var data = new FormData(document.getElementById(id));
+  $.ajax({
+    xhr: function xhr() {
+      var xhr = new window.XMLHttpRequest();
+      xhr.upload.addEventListener("progress", function (evt) {
+        if (evt.lengthComputable) {
+          var percentComplete = evt.loaded / evt.total * 100;
+          percentComplete = Math.round(percentComplete);
+          $(".loading-form").width(percentComplete + '%');
+        }
+      }, false);
+      return xhr;
+    },
+    url: '/' + route,
+    type: 'POST',
+    dataType: 'JSON',
+    data: data,
+    processData: false,
+    contentType: false,
+    beforeSend: function beforeSend() {
+      $(".loading-form").width('0%');
+    },
+    success: function success(retorno) {
+      $('input[type="submit"]').removeClass('disabled');
+
+      if (retorno.status == 1) {
+        showModalSmallResponse(retorno.msg, 'success');
+        setTimeout(redirectToList(), 2000);
+      } else {
+        showModalSmallResponse(retorno.msg, 'error');
+      }
+    },
+    error: function error(retorno) {
+      $('input[type="submit"]').removeClass('disabled');
+      showModalSmallResponse("Ocorreu um erro ao efetuar a operação. Por favor, entre em contato com o Suporte.", 'error');
+    }
+  });
+};
+
+$('form#edit-site-configuration').submit(function (e) {
+  var form = $(this);
+  e.preventDefault();
+
+  if (validateInputs(form)) {
+    $('input[type="submit"]').addClass('disabled');
+    ajaxSubmit("edit-site-configuration", "changeSiteConfigurations");
+  }
+});
+
+/***/ }),
+
+/***/ "./resources/assets/js/admin/resources/volunteering.js":
+/*!*************************************************************!*\
+  !*** ./resources/assets/js/admin/resources/volunteering.js ***!
+  \*************************************************************/
+/***/ (() => {
+
+var redirectToList = function redirectToList() {
+  window.location.href = '/content-adm/lista-voluntariados';
+};
+
+var ajaxSubmit = function ajaxSubmit(id, route) {
+  var data = new FormData(document.getElementById(id));
+  $.ajax({
+    xhr: function xhr() {
+      var xhr = new window.XMLHttpRequest();
+      xhr.upload.addEventListener("progress", function (evt) {
+        if (evt.lengthComputable) {
+          var percentComplete = evt.loaded / evt.total * 100;
+          percentComplete = Math.round(percentComplete);
+          $(".loading-form").width(percentComplete + '%');
+        }
+      }, false);
+      return xhr;
+    },
+    url: '/' + route,
+    type: 'POST',
+    dataType: 'JSON',
+    data: data,
+    processData: false,
+    contentType: false,
+    beforeSend: function beforeSend() {
+      $(".loading-form").width('0%');
+    },
+    success: function success(retorno) {
+      $('input[type="submit"]').removeClass('disabled');
+
+      if (retorno.status == 1) {
+        showModalSmallResponse(retorno.msg, 'success');
+        setTimeout(redirectToList(), 2000);
+      } else {
+        showModalSmallResponse(retorno.msg, 'error');
+      }
+    },
+    error: function error(retorno) {
+      $('input[type="submit"]').removeClass('disabled');
+      showModalSmallResponse("Ocorreu um erro ao efetuar a operação. Por favor, entre em contato com o Suporte.", 'error');
+    }
+  });
+};
+
+$('form#add-volunteering').submit(function (e) {
+  var form = $(this);
+  e.preventDefault();
+
+  if (validateInputs(form)) {
+    $('input[type="submit"]').addClass('disabled');
+    ajaxSubmit("add-volunteering", "addVolunteering");
+  }
+});
+$('form#edit-volunteering').submit(function (e) {
+  var form = $(this);
+  e.preventDefault();
+
+  if (validateInputs(form)) {
+    $('input[type="submit"]').addClass('disabled');
+    ajaxSubmit("edit-volunteering", "changeVolunteering");
+  }
+});
+$(".remove-volunteering").click(function () {
+  var id = $(this).data("value");
+  var confirma = confirm('Deseja realmente remover este item? Esta ação é irreversível.');
+
+  if (confirma) {
+    $.ajax({
+      url: '/deleteVolunteering',
+      type: 'PUT',
+      dataType: 'JSON',
+      data: {
+        id: id
+      },
+      success: function success(retorno) {
+        if (retorno.status == 1 || retorno.status == 2) {
+          showModalSmallResponse(retorno.msg, 'success');
+          setTimeout(redirectToList, 2000);
+        }
+      }
+    });
+  }
+});
+$(".remove-multiple-volunteerings").click(function () {
+  var inputs = [];
+  $("input[name = 'delete-volunteerings[]']").each(function () {
+    if ($(this).prop("checked")) {
+      inputs.push($(this).val());
+    }
+  });
+  var confirma = confirm('Deseja realmente remover estes itens? Esta ação é irreversível.');
+
+  if (confirma) {
+    $.ajax({
+      url: '/deleteMultipleVolunteering',
+      type: 'PUT',
+      dataType: 'JSON',
+      data: {
+        inputs: inputs
+      },
+      success: function success(retorno) {
+        if (retorno.status == 1 || retorno.status == 2) {
+          showModalSmallResponse(retorno.msg, 'success');
+          setTimeout(redirectToList(), 2000);
+        }
+      }
+    });
+  }
+});
+$(".remove-volunteering-submition").click(function () {
+  var id = $(this).data("value");
+  var confirma = confirm('Deseja realmente remover este item? Esta ação é irreversível.');
+
+  if (confirma) {
+    $.ajax({
+      url: '/deleteVolunteeringSubmition',
+      type: 'PUT',
+      dataType: 'JSON',
+      data: {
+        id: id
+      },
+      success: function success(retorno) {
+        if (retorno.status == 1 || retorno.status == 2) {
+          showModalSmallResponse(retorno.msg, 'success');
+          setTimeout(function () {
+            window.location.reload();
+          }, 2000);
+        }
+      }
+    });
+  }
+});
+$(".remove-multiple-volunteerings-submitions").click(function () {
+  var inputs = [];
+  $("input[name = 'delete-volunteerings-submitions[]']").each(function () {
+    if ($(this).prop("checked")) {
+      inputs.push($(this).val());
+    }
+  });
+  var confirma = confirm('Deseja realmente remover estes itens? Esta ação é irreversível.');
+
+  if (confirma) {
+    $.ajax({
+      url: '/deleteMultipleVolunteeringSubmition',
+      type: 'PUT',
+      dataType: 'JSON',
+      data: {
+        inputs: inputs
+      },
+      success: function success(retorno) {
+        if (retorno.status == 1 || retorno.status == 2) {
+          showModalSmallResponse(retorno.msg, 'success');
+          setTimeout(function () {
+            window.location.reload();
+          }, 2000);
         }
       }
     });
