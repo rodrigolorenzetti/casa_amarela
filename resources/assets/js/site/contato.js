@@ -7,18 +7,18 @@ $('form#send-contact').on("submit", function(e){
     let form = $(this);
     e.preventDefault();
     if(validateInputs(form)){
-        $('input[type="submit"]').addClass('disabled');
+        $('button[type="submit"]').addClass('disabled');
         ajaxSubmit("send-contact", "sendContact");
     }
 });
 
-$('form.newsletter-form').on("submit", function(e){
+$('form#add-volunteering-submition').on("submit", function(e){
     let form = $(this);
     let id = $(this).attr('id');
     e.preventDefault();
     if(validateInputs(form)){
-        $('input[type="submit"]').addClass('disabled');
-        ajaxSubmit(id, "sendNewsletter");
+        $('button[type="submit"]').addClass('disabled');
+        ajaxSubmit(id, "addVolunteeringSubmition");
     }
 });
 
@@ -50,21 +50,21 @@ function ajaxSubmit(id, route){
         },
         success     : function(retorno){
 
-            $('input[type="submit"]').removeClass('disabled');
-            $("#modal-result .section-title").html(retorno.title)
-            $("#modal-result .geral-text").html(retorno.text)
-            $("#modal-result").modal("show")
+            $('button[type="submit"]').removeClass('disabled');
+            $("#result-modal .geral-title").html(retorno.title)
+            $("#result-modal .geral-text").html(retorno.text)
+            openModal("result-modal")
 
             if(retorno.status == 1){
                 setTimeout(()=>{redirectToList()}, 4000);
             }
         },
         error     : function(retorno){
-            $('input[type="submit"]').removeClass('disabled');
+            $('button[type="submit"]').removeClass('disabled');
             
-            $("#modal-result .section-title").html("Ocorreu um erro ao efetuar a operação")
-            $("#modal-result .geral-text").html("Por favor, entre em contato com o Suporte.")
-            $("#modal-result").modal("show")
+            $("#result-modal .geral-title").html("Ocorreu um erro ao efetuar a operação")
+            $("#result-modal .geral-text").html("Por favor, entre em contato com o Suporte.")
+            openModal("result-modal")
         }
     });
 }

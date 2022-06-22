@@ -12,14 +12,20 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
 
 use App\Models\DonationOptions;
+use App\Models\Partner;
+use App\Models\Volunteering;
+use App\Models\VolunteeringSubmitions;
+use App\Models\AboutGallery;
 
 class SiteGeralController extends Controller
 {
     public function index()
     {
-        $donation_options = DonationOptions::find(1);
+        $donation_options = DonationOptions::where("status", 1)->get();
+        $partners = Partner::where("status", 1)->get();
+        $volunteerings = Volunteering::where("status", 1)->get();
 
-        return view("site.home.index", compact(['donation_options']));
+        return view("site.home.index", compact(['donation_options', 'partners', 'volunteerings']));
     }
 
     public function donation_plans()
@@ -33,11 +39,9 @@ class SiteGeralController extends Controller
 
     public function about()
     {
-        // $page_home = PageHome::find(1);
+        $images = AboutGallery::where("status", 1)->get();
 
-        return view("site.about.index", [
-            // 'page_home' => $page_home,
-        ]);
+        return view("site.about.index", compact(['images']));
     }
 
     public function contact()
@@ -49,13 +53,15 @@ class SiteGeralController extends Controller
         ]);
     }
 
-    public function volunteering()
+    public function volunteering($url)
     {
-        // $page_home = PageHome::find(1);
+        $volunteering = Volunteering::where("url", $url)->where('status', 1)->first();
 
-        return view("site.volunteering.index", [
-            // 'page_home' => $page_home,
-        ]);
+        if ($volunteering) {
+            return view("site.volunteering.index", compact(["volunteering"]));
+        } else {
+            return redirect()->route('home');
+        }
     }
 
     public function sendContact(Request $request)
@@ -80,18 +86,52 @@ class SiteGeralController extends Controller
         $user['name'] = $request->name;
         $user['phone'] = $request->phone;
         $user['message'] = $request->message;
+        $user['subject'] = "Novo e-mail de contato - ";
 
         if (Mail::send(new ContactEmail($user))) {
             return response()->json([
                 'status' => 1,
                 'title' => "Contato enviado com sucesso!",
-                'msg' => "Fique atento ao seu e-mail. Entraremos em contato por lá!",
+                'text' => "Fique atento ao seu e-mail. Entraremos em contato por lá!",
             ], 200);
         } else {
             return response()->json([
                 'status' => 0,
                 'title' => "Não foi possível enviar seu formulário",
-                'msg' => "Ocorreu um erro interno ao enviar seu e-mail. Já estamos trabalhando nisso, tente novamente mais tarde.",
+                'text' => "Ocorreu um erro interno ao enviar seu e-mail. Já estamos trabalhando nisso, tente novamente mais tarde.",
+            ], 500);
+        }
+    }
+
+    public function addVolunteeringSubmition(Request $request)
+    {
+        VolunteeringSubmitions::create([
+            'name' => $request->name,
+            'email' => $request->email,
+            'phone' => $request->phone,
+            'message' => $request->help_description,
+            'volunteering_id' => $request->volunteering_id,
+            'status' => 1,
+        ]);
+
+        $user = array();
+        $user['email'] = $request->email;
+        $user['name'] = $request->name;
+        $user['phone'] = $request->phone;
+        $user['message'] = $request->help_description;
+        $user['subject'] = "Uma submissão de voluntariado foi feita - ";
+
+        if (Mail::send(new ContactEmail($user))) {
+            return response()->json([
+                'status' => 1,
+                'title' => "Formulário enviado com sucesso!",
+                'text' => "Fique atento ao seu e-mail. Entraremos em contato por lá!",
+            ], 200);
+        } else {
+            return response()->json([
+                'status' => 0,
+                'title' => "Não foi possível enviar seu formulário",
+                'text' => "Ocorreu um erro interno ao enviar seu e-mail. Já estamos trabalhando nisso, tente novamente mais tarde.",
             ], 500);
         }
     }

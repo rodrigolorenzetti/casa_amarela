@@ -16,6 +16,7 @@ return new class extends Migration
         Schema::create('volunteering', function (Blueprint $table) {
             $table->id();
             $table->string('title', 120);
+            $table->string('url', 200);
             $table->text('text');
             $table->string('brief', 300);
             $table->date('date');

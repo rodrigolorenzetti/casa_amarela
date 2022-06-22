@@ -7,7 +7,7 @@ $location = $GLOBALS['location'];
 // $about = new AboutData;
 // $about = $about->readById(1);
 
-// $whatsapp_link = preg_replace('/[\(|\)\-_\s+]/', '', $about['whatsapp']);
+$GLOBALS['whatsapp_link'] = preg_replace('/[\(|\)\-_\s+]/', '', $site_configurations['whatsapp']);
 
 $current_page = explode('/', $_SERVER['REQUEST_URI']);
 $current_page = $current_page[1];
@@ -28,14 +28,14 @@ $current_page = $current_page[1];
 
     {{-- <title>{{ config('app.name') }}</title> --}}
 
-    <title>@yield("page_title", config('app.name'))</title>
-	<meta name='description' content='@yield("page_description", "Temos como missão a preparação e qualificação de adolescentes e Jovens para a inserção no mercado de trabalho e tambem apoiar o desenvolvimento de crianças")'>
-	<meta property='og:title' content='@yield("page_title", config('app.name'))'>
-	<meta property='og:type' content='website'>
-	<meta property='og:image' content='/img/site/brand/big-logo.jpg'>
-	<meta property='og:site_name' content='@yield("page_title", config('app.name'))'>
-	<meta property='og:description' content='@yield("page_description", "Temos como missão a preparação e qualificação de adolescentes e Jovens para a inserção no mercado de trabalho e tambem apoiar o desenvolvimento de crianças")'> 
-	<link rel='canonical' href='https://{{$_SERVER['HTTP_HOST']}}/{{$current_page}}'>
+    <title>@yield('page_title', config('app.name'))</title>
+    <meta name='description' content='@yield('page_description', 'Temos como missão a preparação e qualificação de adolescentes e Jovens para a inserção no mercado de trabalho e tambem apoiar o desenvolvimento de crianças')'>
+    <meta property='og:title' content='@yield('page_title', config('app.name'))'>
+    <meta property='og:type' content='website'>
+    <meta property='og:image' content='/img/site/brand/big-logo.jpg'>
+    <meta property='og:site_name' content='@yield('page_title', config('app.name'))'>
+    <meta property='og:description' content='@yield('page_description', 'Temos como missão a preparação e qualificação de adolescentes e Jovens para a inserção no mercado de trabalho e tambem apoiar o desenvolvimento de crianças')'>
+    <link rel='canonical' href='https://{{ $_SERVER['HTTP_HOST'] }}/{{ $current_page }}'>
 
     <link rel="preload" as="style" href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css"
         onload="this.onload=null;this.rel='stylesheet'">
@@ -115,6 +115,25 @@ $current_page = $current_page[1];
                 <div class="custom-modal-body">
                     <h2 class="geral-title"></h2>
                     <p class="geral-text"></p>
+                </div>
+
+            </div>
+
+        </div>
+
+        <div class="custom-modal" id="cookies-modal">
+            <div class="background"></div>
+
+            <div class="content default-space-between">
+
+                <button class="close-modal" title="Fechar Modal" aria-label="Fechar Modal"><span
+                        class="iconify" data-icon="clarity:times-line"></span></button>
+
+                <div class="custom-modal-body">
+                    <h2 class="geral-title">Termos de uso e Política de Cookies</h2>
+                    <div class="simditor-text">
+                        @php echo $site_configurations->cookies_policy @endphp
+                    </div>
                 </div>
 
             </div>

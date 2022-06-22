@@ -6,13 +6,14 @@
             <div class="content-flex">
                 <h1 class="leftShow">Sobre nós</h1>
                 <div class="divider"></div>
-                <p class="rightShow mb-0">
-                    Temos como missão a preparação e qualificação de adolescentes e Jovens para a inserção no mercado de trabalho e tambem apoiar o desenvolvimento de crianças, adolescentes e Jovens em situação de privação, exclusão e vulnerabilidade social, tornando-as capazes de realizar melhorias em suas vidas e dando a elas oportunidade de se tornarem jovens, adultos, pais e líderes que conferirão mudanças sustentáveis e positivas às comunidades. Mobilizar pessoas e instituições para que atuem na valorização, na proteção e na promoção dos direitos das crianças, adolescentes, Jovens, mulheres, idosos, para que juntos tenhamos uma sociedade mais justa.
-                </p>
+                <div class="rightShow mb-0 simditor-text">
+                    @php echo $site_configurations->about_us_text @endphp
+                </div>
             </div>
 
             <div class="video-div fadeIn">
-                <a href="https://www.youtube.com/watch?v=u31qwQUeGuM&ab_channel=JoomlaTemplate" class="video-item" data-fancybox data-caption="Vídeo Institucional" title="Vídeo Institucional" aria-label="Vídeo Institucional">
+                <a href="{{ $site_configurations->about_us_video_url }}" class="video-item" data-fancybox
+                    data-caption="Vídeo Institucional" title="Vídeo Institucional" aria-label="Vídeo Institucional">
                     <picture>
                         <source type="image/webp" srcset="/img/site/images/video-background.webp">
                         <source type="image/png" srcset="/img/site/images/video-background.png">
@@ -34,12 +35,11 @@
             <div class="about-gallery-grid-area fadeIn">
                 <div class="about-gallery-grid swiper-container">
                     <div class="swiper-wrapper">
-                        <x-GalleryImage title="Criança brincando" pathWebp="/img/site/images/kid-gallery.webp" pathPng="/img/site/images/kid-gallery.png"/>
-                        <x-GalleryImage title="Criança brincando" pathWebp="/img/site/images/video-background.webp" pathPng="/img/site/images/video-background.png"/>
-                        <x-GalleryImage title="Criança brincando" pathWebp="/img/site/images/kid-gallery.webp" pathPng="/img/site/images/kid-gallery.png"/>
-                        <x-GalleryImage title="Criança brincando" pathWebp="/img/site/images/video-background.webp" pathPng="/img/site/images/video-background.png"/>
-                        <x-GalleryImage title="Criança brincando" pathWebp="/img/site/images/kid-gallery.webp" pathPng="/img/site/images/kid-gallery.png"/>
-                        <x-GalleryImage title="Criança brincando" pathWebp="/img/site/images/kid-gallery.webp" pathPng="/img/site/images/kid-gallery.png"/>
+                        @foreach ($images as $image)
+                            <x-GalleryImage title="{{ $image->alt_text }}"
+                                pathWebp="/img/uploads/about_gallery/{{ $image->image }}"
+                                pathPng="/img/uploads/about_gallery/{{ $image->image_webp }}" />
+                        @endforeach
                     </div>
                 </div>
             </div>

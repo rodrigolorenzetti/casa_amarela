@@ -54,7 +54,12 @@
 
     .geral-title {
         font-size: 27px;
+        line-height: 35px;
         margin-bottom: 15px;
+
+        &:after{
+            content: unset
+        }
     }
 
     .geral-text {
@@ -121,6 +126,8 @@
         z-index: 2;
         position: relative;
         max-width: 580px;
+        max-height: 90%;
+        overflow-y: auto;
         transform: scale(0, 0);
         .soft-transition(@time: 0.3s);
     }

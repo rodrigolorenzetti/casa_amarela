@@ -2,13 +2,13 @@ window.validateInputs = function(form){
 
 	let validate = true;
 
-	$('.required').css({'border-color':'#E8E8E8'});
+	form.find('input, textarea, select').removeClass("red-border");
 	
-	form.find('input.required, textarea.required, select.required').each(function(){
+	form.find('input, textarea, select').each(function(){
 
 		if($(this).val() == '' || $(this).val() == null) {
 
-			$(this).css('border-color', '#be0007').focus();
+			$(this).addClass("red-border").focus();
             validate = false;
 			return validate;
 		}

@@ -33,4 +33,7 @@ Route::namespace("Site")
 
         // Rota para a página de voluntariado
         Route::any('voluntariado/{voluntariado}', [SiteGeralController::class, 'volunteering'])->name('volunteering');
+
+        Route::any('sendContact', [SiteGeralController::class, 'sendContact']);
+        Route::any('addVolunteeringSubmition', [SiteGeralController::class, 'addVolunteeringSubmition']);
     });

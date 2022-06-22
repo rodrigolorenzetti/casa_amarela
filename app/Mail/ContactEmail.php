@@ -7,7 +7,7 @@ use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Mail\Mailable;
 use Illuminate\Queue\SerializesModels;
 
-use App\Models\ContactInfo;
+use App\Models\SiteConfigurations;
 
 class ContactEmail extends Mailable
 {
@@ -22,11 +22,11 @@ class ContactEmail extends Mailable
 
     public function build()
     {
-        $contact_info = ContactInfo::find(1);
+        $site_configurations = SiteConfigurations::find(1);
 
         return $this->view('emails.contact_email')
-            ->to($contact_info->email)
-            ->subject("Nova mensagem de contato - " . config('app.name'))
+            ->to($site_configurations->email)
+            ->subject($this->user['subject'] . config('app.name'))
             ->with([
                 'user' => $this->user,
             ]);

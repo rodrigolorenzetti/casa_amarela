@@ -18,8 +18,8 @@
                     <p class="banner-text remove-break">
                         Contribua e participe para continuarmos com<br>nosso projeto de construir uma sociedade melhor!
                     </p>
-                    <a href="https://institutocasaamarela.apoiar.co/" target="_blank" class="btn-geral" title="Doar para a Casa Amarela"
-                        aria-label="Doar para a Casa Amarela">Doar</a>
+                    <a href="{{ $site_configurations->donation_link }}" target="_blank" class="btn-geral"
+                        title="Doar para a Casa Amarela" aria-label="Doar para a Casa Amarela">Doar</a>
                 </div>
                 <div class="image rightShow">
                     <picture>
@@ -42,12 +42,13 @@
             </p>
 
             <div class="geral-grid-div column-3 gap-40 donation-list">
-                <x-DonationCard title="Doe R$5,00" text="2 caixas de leite" isRecommended="0" />
-                <x-DonationCard title="Doe R$15,00" text="1 café da manhã para uma família" isRecommended="0" />
-                <x-DonationCard title="Doe R$30,00" text="1 café da manhã para duas famílias" isRecommended="0" />
-                <x-DonationCard title="Doe R$50,00" text="Ajuda para o sopão comunitário" isRecommended="0" />
-                <x-DonationCard title="Doe R$100,00" text="1 cesta básica" isRecommended="1" />
-                <x-DonationCard title="Ou doe quanto quiser" text="O quanto couber no seu bolso" isRecommended="0" />
+                @foreach ($donation_options as $donation_option)
+                    @php
+                        $isRecommended = $donation_option->title == "Doe R$100,00" ? 1 : 0;
+                    @endphp
+                    <x-DonationCard title="{{ $donation_option->title }}" text="{{ $donation_option->text }}"
+                        isRecommended="{{ $isRecommended }}" />
+                @endforeach
             </div>
 
             <p class="remove-break">
@@ -75,67 +76,57 @@
             </p>
 
             <div class="geral-grid-div column-4 gap-40 mb-0">
-                <x-PartnerItem name="Imagem placeholder" normalSrc="/img/site/images/image-placeholder.png"
-                    webpSrc="/img/site/images/image-placeholder.webp" />
-                <x-PartnerItem name="Imagem placeholder" normalSrc="/img/site/images/image-placeholder.png"
-                    webpSrc="/img/site/images/image-placeholder.webp" />
-                <x-PartnerItem name="Imagem placeholder" normalSrc="/img/site/images/image-placeholder.png"
-                    webpSrc="/img/site/images/image-placeholder.webp" />
-                <x-PartnerItem name="Imagem placeholder" normalSrc="/img/site/images/image-placeholder.png"
-                    webpSrc="/img/site/images/image-placeholder.webp" />
+                @foreach ($partners as $partner)
+                    <x-PartnerItem name="{{ $partner->name }}" normalSrc="/img/uploads/partners/{{ $partner->image }}"
+                        webpSrc="/img/uploads/partners/{{ $partner->image_webp }}" />
+                @endforeach
             </div>
         </article>
     </section>
-    <section class="geral-section pt-0">
-        <div class="container-fluid">
-            <article class="container">
-                <h2 title="Voluntariado">Voluntariado</h2>
-                <p>
-                    Abaixo estão todas as oportunidades de nos ajudar! <br>
-                    Caso queira conversar direto conosco, 
-                    <a class="orange-text" title="Converse conosco" aria-label="Converse conosco" href="{{route('contact')}}"><b>preencha o formulário de contato.</b></a>
-                </p>
-            </article>
-        </div>
-        <div id="voluntariados"></div>
-
-        <div class="volunteering-swiper-area">
-            <div class="volunteering-swiper swiper-container">
-                <div class="swiper-wrapper">
-                    <div class="swiper-slide">
-                        <x-VolunteeringItem title="Oportunidade 1" route="item" text="Lorem ipsum dolor sit amet consectur lorem dolor, lorem ipsum dolor sit amet consectur lorem dolor"/>
-                    </div>    
-                    <div class="swiper-slide">
-                        <x-VolunteeringItem title="Oportunidade 2" route="item" text="Lorem ipsum dolor sit amet consectur lorem dolor, lorem ipsum dolor sit amet consectur lorem dolor"/>
-                    </div>    
-                    <div class="swiper-slide">
-                        <x-VolunteeringItem title="Oportunidade 3" route="item" text="Lorem ipsum dolor sit amet consectur lorem dolor"/>
-                    </div>    
-                    <div class="swiper-slide">
-                        <x-VolunteeringItem title="Oportunidade 4" route="item" text="Lorem ipsum dolor sit amet consectur lorem dolor, lorem ipsum dolor sit amet consectur lorem dolor"/>
-                    </div>    
-                    <div class="swiper-slide">
-                        <x-VolunteeringItem title="Oportunidade 5" route="item" text="Lorem ipsum dolor sit amet consectur lorem dolor, lorem ipsum dolor sit amet consectur lorem dolor"/>
-                    </div>   
-                    <div class="swiper-slide">
-                        <x-VolunteeringItem title="Oportunidade 6" route="item" text="Lorem ipsum dolor sit amet consectur lorem dolor, lorem ipsum dolor sit amet consectur lorem dolor"/>
-                    </div>   
-                </div>                
+    @if (count($volunteerings) > 0)
+        <section class="geral-section pt-0">
+            <div class="container-fluid">
+                <article class="container">
+                    <h2 title="Voluntariado">Voluntariado</h2>
+                    <p>
+                        Abaixo estão todas as oportunidades de nos ajudar! <br>
+                        Caso queira conversar direto conosco,
+                        <a class="orange-text" title="Converse conosco" aria-label="Converse conosco"
+                            href="{{ route('contact') }}"><b>preencha o formulário de contato.</b></a>
+                    </p>
+                </article>
             </div>
-        </div>
-    </section>
+            <div id="voluntariados"></div>
+
+            <div class="volunteering-swiper-area">
+                <div class="volunteering-swiper swiper-container">
+                    <div class="swiper-wrapper">
+                        @foreach ($volunteerings as $volunteering)
+                            <div class="swiper-slide">
+                                <x-VolunteeringItem title="{{ $volunteering->title }}"
+                                    route="{{ $volunteering->url }}" text="{{ $volunteering->brief }}" />
+                            </div>
+                        @endforeach
+                    </div>
+                </div>
+            </div>
+        </section>
+    @endif
 
     <section class="geral-section container-fluid" id="donation">
         <picture>
             <source type="image/webp" srcset="/img/site/images/donation-section.webp">
             <source type="image/png" srcset="/img/site/images/donation-section.png">
-            <img data-src="/img/site/images/donation-section.png" alt="Crianças desenhando"
-                class="lazy" width="1920" height="450">
+            <img data-src="/img/site/images/donation-section.png" alt="Crianças desenhando" class="lazy"
+                width="1920" height="450">
         </picture>
         <article class="container fadeIn">
             <h2 title="Faça uma doação">Faça uma doação</h2>
-            <p class="remove-break">Faça uma doação, seja em dinheiro ou materiais que precisamos e ajude<br>o instituto a crescer e continuar na luta por uma sociedade melhor</p>
-            <a href="https://institutocasaamarela.apoiar.co/" target="_blank" class="btn-geral" title="Doar" aria-label="Doar">Doar</a>
+            <p class="remove-break">Faça uma doação, seja em dinheiro ou materiais que precisamos e ajude<br>o
+                instituto a
+                crescer e continuar na luta por uma sociedade melhor</p>
+            <a href="{{ $site_configurations->donation_link }}" target="_blank" class="btn-geral" title="Doar"
+                aria-label="Doar">Doar</a>
         </article>
     </section>
 @endsection

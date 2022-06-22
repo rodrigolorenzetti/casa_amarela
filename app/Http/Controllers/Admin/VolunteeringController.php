@@ -28,6 +28,7 @@ class VolunteeringController extends Controller
             $volunteering = new Volunteering();
 
             $volunteering->title = $request->title;
+            $volunteering->url = friendlyUrl($request->title);
             $volunteering->text = $request->text;
             $volunteering->brief = $request->brief;
             $volunteering->date = $request->date;
@@ -65,6 +66,7 @@ class VolunteeringController extends Controller
         try {
 
             $data = $request->all();
+            $data['url'] = friendlyUrl($request->title);
 
             Volunteering::findOrFail($request->id)->update($data);
 

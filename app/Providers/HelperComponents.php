@@ -3,6 +3,7 @@
 namespace App\Providers;
 
 use Illuminate\Support\ServiceProvider;
+use App\Models\SiteConfigurations;
 
 class HelperComponents extends ServiceProvider
 {
@@ -32,12 +33,15 @@ class HelperComponents extends ServiceProvider
                 $eye_slash_iconify = '<span class="iconify" data-icon="heroicons-outline:eye-off"></span>';
                 $images_iconify = '<span class="iconify" data-icon="bi:images"></span>';
 
+                $site_configurations = SiteConfigurations::find(1);
+
                 $view->with('pen_iconify', $pen_iconify);
                 $view->with('trash_iconify', $trash_iconify);
                 $view->with('eye_iconify', $eye_iconify);
                 $view->with('eye_slash_iconify', $eye_slash_iconify);
                 $view->with('images_iconify', $images_iconify);
                 $view->with('pen_iconify', $pen_iconify);
+                $view->with('site_configurations', $site_configurations);
             }
         });
     }
