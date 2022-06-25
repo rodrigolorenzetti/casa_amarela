@@ -4,20 +4,20 @@ Siga os passos descritos abaixo para rodar a aplicação.
 
 ## Requisitos
 
-PHP >= 8.0
-Composer >= 2.0
-NPM instalado
+PHP >= 8.0<br />
+Composer >= 2.0<br />
+NPM instalado<br />
 
 ## Instalação / configuração
 
 Primeiramente, é necessário criar seu banco de dados local e alterar sua conexão no arquivo .env, localizado na raíz do projeto:
 
-DB_CONNECTION=mysql
-DB_HOST=127.0.0.1
-DB_PORT=3306
-DB_DATABASE=[insira aqui o banco de dados do projeto]
-DB_USERNAME=[insira aqui nome de usuario da sua conexao]
-DB_PASSWORD=[insira aqui a senha da sua conexao]
+DB_CONNECTION=mysql<br />
+DB_HOST=127.0.0.1<br />
+DB_PORT=3306<br />
+DB_DATABASE=[insira aqui o banco de dados do projeto]<br />
+DB_USERNAME=[insira aqui nome de usuario da sua conexao]<br />
+DB_PASSWORD=[insira aqui a senha da sua conexao]<br />
 
 Para criar o banco de dados com a tabela admins:
 
