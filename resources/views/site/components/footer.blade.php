@@ -26,7 +26,7 @@
 
                 <ul class="footer-list">
                     <li>
-                        <a href={{ $site_configurations->facebook }}" target="_blank" class="footer-text footer-link"
+                        <a href="{{ $site_configurations->facebook }}" target="_blank" class="footer-text footer-link"
                             title="Ir para o Facebook da Casa Amarela" aria-label="Ir para o Facebook da Casa Amarela">
                             <span class="iconify" data-icon="akar-icons:facebook-fill"></span>
                         </a>
