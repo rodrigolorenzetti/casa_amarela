@@ -167,7 +167,7 @@ $urlDashboard = $GLOBALS['urlDashboard'];
     <script src="/lib/simditor-2.3.28/site/assets/scripts/simditor.js"></script>
 
     <!-- Admins Scripts -->
-    <script src="{{ mix('js/admin/index.js') }}"></script>
+    <script src="{{ mix('js/admin/index.js') }}?vs=1"></script>
 </body>
 
 </html>

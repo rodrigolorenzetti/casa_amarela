@@ -74,13 +74,14 @@
                     href="{{ route('donation_plans') }}#seja-um-parceiro"
                     aria-label="Seja um parceiro Casa Amarela"><b>Seja um parceiro Casa Amarela</b></a>.
             </p>
-
+            @if (count($partners) > 0)
             <div class="geral-grid-div column-4 gap-40 mb-0">
                 @foreach ($partners as $partner)
                     <x-PartnerItem name="{{ $partner->name }}" normalSrc="/img/uploads/partners/{{ $partner->image }}"
                         webpSrc="/img/uploads/partners/{{ $partner->image_webp }}" />
                 @endforeach
             </div>
+            @endif
         </article>
     </section>
     @if (count($volunteerings) > 0)

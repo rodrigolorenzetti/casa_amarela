@@ -68,6 +68,8 @@ class AdminController extends Controller
 
             if ($request->password != "") {
                 $data['password'] = Hash::make($request->password);
+            } else {
+                unset($data['password']);
             }
 
             Admin::findOrFail($request->id)->update($data);

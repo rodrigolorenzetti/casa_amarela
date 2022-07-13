@@ -66,7 +66,7 @@ $('form#add-admin').submit(function(e) {
 
 	if(validateInputs(form) && validatePassword()){
 		$('input[type="submit"]').addClass('disabled');
-		ajaxSubmit("add-amin", "addAdmin");
+		ajaxSubmit("add-admin", "addAdmin");
 	}
 });
 
@@ -97,7 +97,7 @@ $('form#edit-admin').submit(function(e) {
 
 	if (okGo) {
 		$('input[type="submit"]').addClass('disabled');
-		ajaxSubmit("edit-amin", "changeAdmin");
+		ajaxSubmit("edit-admin", "changeAdmin");
 	}
 });
 
